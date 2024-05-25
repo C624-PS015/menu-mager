@@ -1,5 +1,7 @@
 node_modules
 *.yaml
-coverage
 log
 .env
+.idea
+*.sql
+bun.lockb
