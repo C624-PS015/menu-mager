@@ -4,4 +4,5 @@ log
 .env
 /.idea
 *.sql
+package-lock.json
 prisma/migrations
