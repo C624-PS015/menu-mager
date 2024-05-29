@@ -2,7 +2,6 @@
 *.yaml
 log
 .env
-.env.production
 /.idea
 *.sql
-*.lockb
+prisma/migrations
