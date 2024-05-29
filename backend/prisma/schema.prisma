@@ -6,3 +6,229 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id            String         @id @default(uuid())
+  role          String         @default("user")
+  name          String
+  email         String         @unique
+  phone         String?        @unique
+  password      String
+  avatar        String
+  refresh_token String
+  created_at    DateTime       @default(now())
+  updated_at    DateTime       @updatedAt
+  Address       Address?
+  Subscription  Subscription[]
+}
+
+model Address {
+  id             String   @id @default(uuid())
+  user_id        String   @unique
+  province       String
+  district       String
+  sub_district   String
+  post_code      String
+  village        String
+  rt             Int
+  rw             Int
+  detail_address String
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  User           User     @relation(references: [id], fields: [user_id])
+}
+
+model Subscription {
+  id                 String              @id @default(uuid())
+  user_id            String
+  is_pay             Boolean             @default(false)
+  is_active          Boolean             @default(false)
+  User               User                @relation(references: [id], fields: [user_id])
+  SubscriptionDetail SubscriptionDetail?
+}
+
+model SubscriptionDetail {
+  id                      String                    @id @default(uuid())
+  subscription_id         String                    @unique
+  num_of_people           Int
+  meals_per_week          Int
+  total_serving           Int
+  box_price               Int
+  price_per_serving       Int
+  shipping_price          Int
+  total_price             Int
+  start_date              DateTime
+  end_date                DateTime
+  pay_at                  DateTime
+  created_at              DateTime                  @default(now())
+  Subscription            Subscription              @relation(references: [id], fields: [subscription_id])
+  SubscriptionPreferences SubscriptionPreferences[]
+  SubscriptionDelivery    SubscriptionDelivery[]
+
+  @@map("subscription_detail")
+}
+
+model SubscriptionPreferences {
+  id                     String             @id @default(uuid())
+  subscription_detail_id String
+  preferences_id         Int
+  SubscriptionDetail     SubscriptionDetail @relation(references: [id], fields: [subscription_detail_id])
+  Preferences            Preferences        @relation(references: [id], fields: [preferences_id])
+
+  @@map("subscription_preferences")
+}
+
+model SubscriptionDelivery {
+  id                         String                       @id @default(uuid())
+  subscription_detail_id     String
+  date                       DateTime
+  status                     String
+  total_recipe               Int
+  accepted_at                DateTime
+  send_at                    DateTime
+  created_at                 DateTime                     @default(now())
+  updated_at                 DateTime                     @updatedAt
+  SubscriptionDetail         SubscriptionDetail           @relation(references: [id], fields: [subscription_detail_id])
+  SubscriptionDeliveryRecipe SubscriptionDeliveryRecipe[]
+
+  @@map("subscription_delivery")
+}
+
+model SubscriptionDeliveryRecipe {
+  id                       String               @id @default(uuid())
+  subscription_delivery_id String
+  recipe_id                String
+  amount                   Int
+  created_at               DateTime             @default(now())
+  updated_at               DateTime             @updatedAt
+  SubscriptionDelivery     SubscriptionDelivery @relation(references: [id], fields: [subscription_delivery_id])
+  Recipe                   Recipe               @relation(references: [id], fields: [recipe_id])
+
+  @@map("subscription_delivery_recipe")
+}
+
+model SubscriptionPlan {
+  id                          Int                           @id @default(autoincrement())
+  price_per_serving           Int
+  SubscriptionPlanPreferences SubscriptionPlanPreferences[]
+
+  @@map("subscription_plan")
+}
+
+model SubscriptionPlanPreferences {
+  id                   Int              @id @default(autoincrement())
+  subscribtion_plan_id Int
+  preferences_id       Int
+  SubscriptionPlan     SubscriptionPlan @relation(references: [id], fields: [subscribtion_plan_id])
+  Preferences          Preferences      @relation(references: [id], fields: [preferences_id])
+
+  @@map("subscription_plan_preferences")
+}
+
+model AvailableFood {
+  id                  String                @id @default(uuid())
+  date                DateTime
+  created_at          DateTime              @default(now())
+  updated_at          DateTime              @updatedAt
+  AvailableFoodRecipe AvailableFoodRecipe[]
+
+  @@map("available_food")
+}
+
+model AvailableFoodRecipe {
+  id                String        @id @default(uuid())
+  available_food_id String
+  recipe_id         String
+  AvailableFood     AvailableFood @relation(references: [id], fields: [available_food_id])
+  Recipe            Recipe        @relation(references: [id], fields: [recipe_id])
+
+  @@map("available_food_recipe")
+}
+
+model Recipe {
+  id                         String                       @id @default(uuid())
+  name                       String                       @unique
+  photo                      String
+  description                String
+  created_at                 DateTime                     @default(now())
+  updated_at                 DateTime                     @updatedAt
+  AvailableFoodRecipe        AvailableFoodRecipe[]
+  RecipeAllergy              RecipeAllergy[]
+  RecipeMaterial             RecipeMaterial[]
+  RecipePreferences          RecipePreferences[]
+  Instruction                Instruction[]
+  SubscriptionDeliveryRecipe SubscriptionDeliveryRecipe[]
+}
+
+model RecipeAllergy {
+  id         String  @id @default(uuid())
+  recipe_id  String
+  allergy_id Int
+  Recipe     Recipe  @relation(references: [id], fields: [recipe_id])
+  Allergy    Allergy @relation(references: [id], fields: [allergy_id])
+
+  @@map("recipe_allergy")
+}
+
+model RecipeMaterial {
+  id          String   @id @default(uuid())
+  recipe_id   String
+  material_id String
+  amount      Int
+  unit        String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  Recipe      Recipe   @relation(references: [id], fields: [recipe_id])
+  Material    Material @relation(references: [id], fields: [material_id])
+
+  @@map("recipe_material")
+}
+
+model RecipePreferences {
+  id             String      @id @default(uuid())
+  recipe_id      String
+  preferences_id Int
+  Recipe         Recipe      @relation(references: [id], fields: [recipe_id])
+  Preferences    Preferences @relation(references: [id], fields: [preferences_id])
+
+  @@map("recipe_preferences")
+}
+
+model Instruction {
+  id                 String   @id @default(uuid())
+  recipe_id          String
+  instruction_number Int
+  description        String
+  photo              String
+  created_at         DateTime @default(now())
+  updated_at         DateTime @updatedAt
+  Recipe             Recipe   @relation(references: [id], fields: [recipe_id])
+}
+
+model Allergy {
+  id            Int             @id @default(autoincrement())
+  name          String          @unique
+  created_at    DateTime        @default(now())
+  updated_at    DateTime        @updatedAt
+  RecipeAllergy RecipeAllergy[]
+}
+
+model Material {
+  id             String           @id @default(uuid())
+  name           String           @unique
+  photo          String
+  created_at     DateTime         @default(now())
+  updated_at     DateTime         @updatedAt
+  RecipeMaterial RecipeMaterial[]
+}
+
+model Preferences {
+  id                          Int                           @id @default(autoincrement())
+  name                        String                        @unique
+  photo                       String
+  created_at                  DateTime                      @default(now())
+  updated_at                  DateTime                      @updatedAt
+  SubscriptionPreferences     SubscriptionPreferences[]
+  SubscriptionPlanPreferences SubscriptionPlanPreferences[]
+  RecipePreferences           RecipePreferences[]
+}
