@@ -8,31 +8,31 @@ datasource db {
 }
 
 model User {
-  id            String         @id @default(uuid())
-  role          String         @default("user")
-  name          String
-  email         String         @unique
-  phone         String?        @unique
-  password      String
-  avatar        String
-  refresh_token String
-  created_at    DateTime       @default(now())
-  updated_at    DateTime       @updatedAt
-  Address       Address?
-  Subscription  Subscription[]
+  id           String         @id @default(uuid())
+  role         String         @default("user") @db.VarChar(5)
+  name         String         @db.VarChar(100)
+  email        String         @unique @db.VarChar(100)
+  phone        String?        @unique @db.VarChar(12)
+  password     String         @db.VarChar(100)
+  token        String?        @unique
+  avatar       String         @db.VarChar(100)
+  created_at   DateTime       @default(now())
+  updated_at   DateTime       @updatedAt
+  Address      Address?
+  Subscription Subscription[]
 }
 
 model Address {
   id             String   @id @default(uuid())
   user_id        String   @unique
-  province       String
-  district       String
-  sub_district   String
-  post_code      String
-  village        String
+  province       String   @db.VarChar(50)
+  district       String   @db.VarChar(50)
+  sub_district   String   @db.VarChar(50)
+  post_code      String   @db.VarChar(50)
+  village        String   @db.VarChar(50)
   rt             Int
   rw             Int
-  detail_address String
+  detail_address String?  @db.VarChar(100)
   created_at     DateTime @default(now())
   updated_at     DateTime @updatedAt
   User           User     @relation(references: [id], fields: [user_id])
@@ -57,9 +57,9 @@ model SubscriptionDetail {
   price_per_serving       Int
   shipping_price          Int
   total_price             Int
-  start_date              DateTime
-  end_date                DateTime
-  pay_at                  DateTime
+  start_date              DateTime?
+  end_date                DateTime?
+  pay_at                  DateTime?
   created_at              DateTime                  @default(now())
   Subscription            Subscription              @relation(references: [id], fields: [subscription_id])
   SubscriptionPreferences SubscriptionPreferences[]
@@ -82,10 +82,10 @@ model SubscriptionDelivery {
   id                         String                       @id @default(uuid())
   subscription_detail_id     String
   date                       DateTime
-  status                     String
+  status                     String                       @db.VarChar(20)
   total_recipe               Int
-  accepted_at                DateTime
-  send_at                    DateTime
+  accepted_at                DateTime?
+  send_at                    DateTime?
   created_at                 DateTime                     @default(now())
   updated_at                 DateTime                     @updatedAt
   SubscriptionDetail         SubscriptionDetail           @relation(references: [id], fields: [subscription_detail_id])
@@ -117,9 +117,9 @@ model SubscriptionPlan {
 
 model SubscriptionPlanPreferences {
   id                   Int              @id @default(autoincrement())
-  subscribtion_plan_id Int
+  subscription_plan_id Int
   preferences_id       Int
-  SubscriptionPlan     SubscriptionPlan @relation(references: [id], fields: [subscribtion_plan_id])
+  SubscriptionPlan     SubscriptionPlan @relation(references: [id], fields: [subscription_plan_id])
   Preferences          Preferences      @relation(references: [id], fields: [preferences_id])
 
   @@map("subscription_plan_preferences")
@@ -147,7 +147,7 @@ model AvailableFoodRecipe {
 
 model Recipe {
   id                         String                       @id @default(uuid())
-  name                       String                       @unique
+  name                       String                       @unique @db.VarChar(150)
   photo                      String
   description                String
   created_at                 DateTime                     @default(now())
@@ -215,7 +215,7 @@ model Allergy {
 
 model Material {
   id             String           @id @default(uuid())
-  name           String           @unique
+  name           String           @unique @db.VarChar(100)
   photo          String
   created_at     DateTime         @default(now())
   updated_at     DateTime         @updatedAt
@@ -224,8 +224,8 @@ model Material {
 
 model Preferences {
   id                          Int                           @id @default(autoincrement())
-  name                        String                        @unique
-  photo                       String
+  name                        String                        @unique @db.VarChar(50)
+  photo                       String                        @db.VarChar(100)
   created_at                  DateTime                      @default(now())
   updated_at                  DateTime                      @updatedAt
   SubscriptionPreferences     SubscriptionPreferences[]

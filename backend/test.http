@@ -1,0 +1,11 @@
+POST http://localhost:9000/api/admin
+Content-Type: application/json
+
+{
+  "email": "admin@gmail.com",
+  "password": "menumageradmi"
+}
+
+###
+GET http://localhost:9000
+Content-Type: application/json
