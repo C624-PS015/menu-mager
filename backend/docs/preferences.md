@@ -9,7 +9,7 @@ Request Body:
 ``` json
 {
     header: {
-        Authorization: Bearer <token>,
+        Authorization: "Bearer <token>",
         Content-type: "multipart/form-data"
     },
     body: {
@@ -50,7 +50,7 @@ Request Body:
 ``` json
 {
     header: {
-        Authorization: Bearer <token>,  
+        Authorization: "Bearer <token>",  
         Content-type: "multipart/form-data"
     },
     body: {
@@ -91,7 +91,7 @@ Request Body:
 ``` json
 {
     header: {
-        Authorization: Bearer <token>,
+        Authorization: "Bearer <token>",
         Content-type: "multipart/form-data"
     },
     body: {
@@ -132,7 +132,7 @@ Request Body:
 ``` json
 {
     header: {
-        Authorization: Bearer <token>,
+        Authorization: "Bearer <token>",
     }
 }
 ```
