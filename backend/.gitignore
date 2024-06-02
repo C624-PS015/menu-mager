@@ -7,3 +7,4 @@ log
 package-lock.json
 prisma/migrations
 /test
+*.http
