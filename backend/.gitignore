@@ -6,3 +6,4 @@ log
 *.sql
 package-lock.json
 prisma/migrations
+/test

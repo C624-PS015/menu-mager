@@ -1,8 +1,13 @@
 import Joi from "joi";
 
 const createPreferencesValidation = Joi.object({
-  name: Joi.string().max(50).required(),
-  photo: Joi.string().max(100).required(),
+    name: Joi.string().max(50).required(),
+    photo: Joi.string().max(100).required(),
 });
 
-export { createPreferencesValidation };
+const updatePreferencesValidation = Joi.object({
+    name: Joi.string().max(50).required(),
+    photo: Joi.string().max(100).required(),
+})
+
+export {createPreferencesValidation, updatePreferencesValidation};

@@ -8,8 +8,13 @@ Request Body :
 
 ```json
 {
-  "email": "example@gmail.com",
-  "password": "secret123"
+  "header": {
+    "Content-type": "application/json"
+  },
+  "body": {
+    "email": "example@gmail.com",
+    "password": "secret12345"
+  }
 }
 ```
 
