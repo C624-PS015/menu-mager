@@ -154,8 +154,8 @@ Response Body Error :
 
 ``` json
 {
-    status: "fail",
-    message: "no preferences found!",
+    "status": "fail",
+    "message": "no preferences found!",
 }
 ```
 ## Get All Preferences
@@ -166,14 +166,14 @@ Response Body Success :
 
 ``` json
 {
-    status: "success",
-    message: "success get all data preferences",
-    data: [
+    "status": "success",
+    "message": "success get all data preferences",
+    "data": [
         {
-            name: "example name",
-            photo: "example photo"
+            "name": "example name",
+            "photo": "example photo"
         },
-        ...
+        "..."
     ]
 }
 ```
