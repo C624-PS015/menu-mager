@@ -94,7 +94,7 @@ Request Body:
         "Authorization": "Bearer <token>",
         "Content-type": "multipart/form-data"
     },
-    body: {
+    "body": {
         "name": "example name"
         "photo": "example.jpg"
     }
