@@ -8,13 +8,13 @@ Request Body:
 
 ``` json
 {
-    header: {
-        Authorization: "Bearer <token>",
-        Content-type: "multipart/form-data"
+    "header": {
+        "Authorization": "Bearer <token>",
+        "Content-type": "multipart/form-data"
     },
-    body: {
-        name: "example name"
-        photo: "example.jpg"
+    "body": {
+        "name": "example name"
+        "photo": "example.jpg"
     }
 }
 ```
@@ -23,11 +23,11 @@ Response Body Success :
 
 ``` json
 {
-    status: "success",
-    message: "success add data preferences",
-    data: {
-        name: "example name"
-        photo: "example.jpg"
+    "status": "success",
+    "message": "success add data preferences",
+    "data": {
+        "name": "example name"
+        "photo": "example.jpg"
     }
 }
 ```
@@ -36,8 +36,8 @@ Response Body Error :
 
 ``` json
 {
-    status: "fail",
-    message: "preferences name already exists!",
+    "status": "fail",
+    "message": "preferences name already exists!",
 }
 ```
 
@@ -49,13 +49,13 @@ Request Body:
 
 ``` json
 {
-    header: {
-        Authorization: "Bearer <token>",  
-        Content-type: "multipart/form-data"
+    "header": {
+        "Authorization": "Bearer <token>",  
+        "Content-type": "multipart/form-data"
     },
-    body: {
-        name: "example name"
-        photo: "example.jpg"
+    "body": {
+        "name": "example name"
+        "photo": "example.jpg"
     }
 }
 ```
@@ -64,11 +64,11 @@ Response Body Success :
 
 ``` json
 {
-    status: "success",
-    message: "success update data preferences",
-    data: {
-        name: "example name"
-        photo: "example.jpg"
+    "status": "success",
+    "message": "success update data preferences",
+    "data": {
+        "name": "example name"
+        "photo": "example.jpg"
     }
 }
 ```
@@ -77,8 +77,8 @@ Response Body Error :
 
 ``` json
 {
-    status: "fail",
-    message: "no preferences found!",
+    "status": "fail",
+    "message": "no preferences found!",
 }
 ```
 
@@ -90,13 +90,13 @@ Request Body:
 
 ``` json
 {
-    header: {
-        Authorization: "Bearer <token>",
-        Content-type: "multipart/form-data"
+    "header": {
+        "Authorization": "Bearer <token>",
+        "Content-type": "multipart/form-data"
     },
     body: {
-        name: "example name"
-        photo: "example.jpg"
+        "name": "example name"
+        "photo": "example.jpg"
     }
 }
 ```
@@ -105,11 +105,11 @@ Response Body Success :
 
 ``` json
 {
-    status: "success",
-    message: "success remove data preferences",
-    data: {
-        name: "example name"
-        photo: "example.jpg"
+    "status": "success",
+    "message": "success remove data preferences",
+    "data": {
+        "name": "example name"
+        "photo": "example.jpg"
     }
 }
 ```
@@ -118,8 +118,8 @@ Response Body Error :
 
 ``` json
 {
-    status: "fail",
-    message: "no preferences found!",
+    "status": "fail",
+    "message": "no preferences found!",
 }
 ```
 
@@ -131,8 +131,8 @@ Request Body:
 
 ``` json
 {
-    header: {
-        Authorization: "Bearer <token>",
+    "header": {
+        "Authorization": "Bearer <token>",
     }
 }
 ```
@@ -141,11 +141,11 @@ Response Body Success :
 
 ``` json
 {
-    status: "success",
-    message: "success get detail data preferences",
-    data: {
-        name: "example name"
-        photo: "example.jpg"
+    "status": "success",
+    "message": "success get detail data preferences",
+    "data": {
+        "name": "example name"
+        "photo": "example.jpg"
     }
 }
 ```
