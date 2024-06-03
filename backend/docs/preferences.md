@@ -37,7 +37,7 @@ Response Body Error :
 ``` json
 {
     "status": "fail",
-    "message": "preferences name already exists!",
+    "message": "preferences already exists!",
 }
 ```
 
@@ -78,7 +78,7 @@ Response Body Error :
 ``` json
 {
     "status": "fail",
-    "message": "no preferences found!",
+    "message": "preferences not found!",
 }
 ```
 
@@ -119,7 +119,7 @@ Response Body Error :
 ``` json
 {
     "status": "fail",
-    "message": "no preferences found!",
+    "message": "preferences not found!",
 }
 ```
 
@@ -155,7 +155,7 @@ Response Body Error :
 ``` json
 {
     "status": "fail",
-    "message": "no preferences found!",
+    "message": "preferences not found!",
 }
 ```
 ## Get All Preferences
