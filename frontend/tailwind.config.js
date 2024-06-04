@@ -10,10 +10,26 @@ export default {
       lg: '976px',
       xl: '1440px',
     },
-    extend: {},
+
+    extend: {
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+      },
+      colors: {
+        primary: '#1F384C',
+        secondary: '#273240',
+        accent: '#5A6ACF',
+        'accent-2': '#A6ABC8',
+        'accent-hover': '#4753a2',
+        customGray: '#082431',
+      },
+      backgroundColor: {
+        sidebar: '#F1F2F7',
+      },
+    },
   },
-  plugins: [daisyui],
+  plugins: ['@tailwindcss/typography', daisyui],
   daisyui: {
-    themes: [],
+    themes: ['fantasy'],
   },
 };
