@@ -1,1 +1,1 @@
-export * from './RouteBase';
+export { router } from './RouteBase';

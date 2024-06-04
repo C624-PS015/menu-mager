@@ -1,9 +1,10 @@
+/* eslint-disable comma-dangle */
+import store from './store.jsx';
 import ReactDOM from 'react-dom/client';
 import React from 'react';
 import { RouterProvider } from 'react-router-dom';
+import { router } from './routes';
 import { Provider } from 'react-redux';
-import store from './store.jsx';
-import router from './routes/RouteBase';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(

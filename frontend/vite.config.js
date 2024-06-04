@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => {
     plugins: [react(), compression()],
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, 'src'),
+        '@': path.resolve(__dirname, 'src/'),
       },
     },
     server: {
