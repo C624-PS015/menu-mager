@@ -6,6 +6,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
     'plugin:react-hooks/recommended',
+    'airbnb-base',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module', ecmaFeatures: { jsx: true } },
@@ -19,5 +20,4 @@ module.exports = {
     'import/no-unresolved': 'off',
     'import/extensions': 'off',
     'object-curly-newline': 'off',
-  },
-}
+};
