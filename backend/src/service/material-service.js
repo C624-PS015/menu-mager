@@ -7,7 +7,7 @@ import ResponseError from "../error/response-error.js";
 const create = async (request) => {
   const payload = {
     name: request.body.name,
-    photo: "/images/" + request.file.fileName,
+    photo: "/images/" + request.file.filename,
   };
 
   const material = validate(materialValidation, payload);
