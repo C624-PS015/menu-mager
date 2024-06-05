@@ -1,11 +1,11 @@
-import recipeService from "../service/recipe-service.js";
+import allergyService from "../service/allergy-service.js";
 
 const create = async (req, res, next) => {
   try {
-    const result = await recipeService.create(req);
+    const result = await allergyService.create(req);
     res.status(201).json({
       status: "success",
-      message: "success create recipe!",
+      message: "success create allergy!",
       data: {
         ...result,
       },
@@ -17,10 +17,10 @@ const create = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   try {
-    const result = await recipeService.update(req);
+    const result = await allergyService.update(req);
     res.status(200).json({
       status: "success",
-      message: "success update recipe!",
+      message: "success update allergy!",
       data: {
         ...result,
       },
@@ -32,10 +32,10 @@ const update = async (req, res, next) => {
 
 const remove = async (req, res, next) => {
   try {
-    const result = await recipeService.remove(req);
+    const result = await allergyService.remove(req);
     res.status(200).json({
       status: "success",
-      message: "success remove recipe!",
+      message: "success remove allergy!",
       data: {
         ...result,
       },
@@ -47,10 +47,10 @@ const remove = async (req, res, next) => {
 
 const getDetail = async (req, res, next) => {
   try {
-    const result = await recipeService.getDetail(req);
+    const result = await allergyService.getDetail(req);
     res.status(200).json({
       status: "success",
-      message: "success get detail recipe!",
+      message: "success get detail allergy!",
       data: {
         ...result,
       },
@@ -62,10 +62,10 @@ const getDetail = async (req, res, next) => {
 
 const getAll = async (req, res, next) => {
   try {
-    const result = await recipeService.getAll(req);
+    const result = await allergyService.getAll(req);
     res.status(200).json({
       status: "success",
-      message: "success get all recipe!",
+      message: "success get all allergy!",
       data: {
         ...result,
       },
@@ -75,4 +75,10 @@ const getAll = async (req, res, next) => {
   }
 };
 
-export default { create, update, remove, getDetail, getAll };
+export default {
+  create,
+  update,
+  remove,
+  getDetail,
+  getAll,
+};

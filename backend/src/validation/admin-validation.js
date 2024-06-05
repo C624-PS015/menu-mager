@@ -5,4 +5,4 @@ const loginValidation = Joi.object({
   password: Joi.string().min(8).max(100).required(),
 });
 
-export { loginValidation };
+export default loginValidation;

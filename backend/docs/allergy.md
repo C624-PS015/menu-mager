@@ -1,8 +1,8 @@
-# Preference API Spec
+# Allergy API Spec
 
-## Create preference API
+## Create allergy API
 
-Endpoint : POST /api/preference
+Endpoint : POST /api/allergy
 
 Request Body :
 
@@ -10,11 +10,10 @@ Request Body :
 {
   "header": {
     "Authorization": "Bearer <token>",
-    "Content-type": "multipart/form-data"
+    "Content-type": "application/json"
   },
   "body": {
-    "name": "example",
-    "photo": "example.jpg"
+    "name": "example"
   }
 }
 ```
@@ -28,11 +27,10 @@ Response body success:
   },
   "body": {
     "status": "success",
-    "message": "success add preferences!",
+    "message": "success add allergy!",
     "data": {
       "id": 1,
-      "name": "example",
-      "photo": "example.jpg"
+      "name": "example"
     }
   }
 }
@@ -47,14 +45,14 @@ Response body error:
   },
   "body": {
     "status": "fail",
-    "message": "preferences already exists!"
+    "message": "allergy already exists!"
   }
 }
 ```
 
-## Update preference API
+## Update allergy API
 
-Endpoint : PUT /api/preference/:id
+Endpoint : PUT /api/allergy/:id
 
 Request body :
 
@@ -62,11 +60,10 @@ Request body :
 {
   "header": {
     "Authorization": "Bearer <token>",
-    "Content-type": "multipart/form-data"
+    "Content-type": "application/json"
   },
   "body": {
-    "name": "example",
-    "photo": "example.jpg"
+    "name": "example"
   }
 }
 ```
@@ -80,11 +77,10 @@ Response body success :
   },
   "body": {
     "status": "success",
-    "message": "success update preferences!",
+    "message": "success update allergy!",
     "data": {
       "id": 1,
-      "name": "example",
-      "photo": "example.jpg"
+      "name": "example"
     }
   }
 }
@@ -99,14 +95,14 @@ Response body error :
   },
   "body": {
     "status": "fail",
-    "message": "preferences not found!"
+    "message": "allergy not found!"
   }
 }
 ```
 
-## Remove preference API
+## Remove allergy API
 
-Endpoint : DELETE /api/preference/:id
+Endpoint : DELETE /api/allergy/:id
 
 Request body:
 
@@ -127,11 +123,10 @@ Response body success :
   },
   "body": {
     "status": "success",
-    "message": "success remove preferences!",
+    "message": "success remove allergy!",
     "data": {
       "id": 1,
-      "name": "example",
-      "photo": "example.jpg"
+      "name": "example"
     }
   }
 }
@@ -146,14 +141,14 @@ Response body error :
   },
   "body": {
     "status": "fail",
-    "message": "preferences not found!"
+    "message": "allergy not found!"
   }
 }
 ```
 
-## Get detail preference API
+## Get detail allergy API
 
-Endpoint : GET /api/preference/:id
+Endpoint : GET /api/allergy/:id
 
 Request body:
 
@@ -178,8 +173,7 @@ Response body success :
     "data": {
       "id": 1,
       "name": "example",
-      "photo": "example.jpg",
-      "recipe_preferences": [
+      "recipe_allergy": [
         {
           "recipe": {
             "id": "unique-id",
@@ -203,13 +197,13 @@ Response body error :
   },
   "body": {
     "status": "fail",
-    "message": "preferences not found!"
+    "message": "allergy not found!"
   }
 }
 ```
-## Get all preference API
+## Get all allergy API
 
-Endpoint : GET /api/preference
+Endpoint : GET /api/allergy
 
 Response body success :
 
@@ -220,12 +214,11 @@ Response body success :
   },
   "body": {
     "status": "success",
-    "message": "success get all preferences!",
+    "message": "success get all allergy!",
     "data": [
       {
         "id": 1, 
-        "name": "example",
-        "photo": "example.jpg"
+        "name": "example"
       }
     ]
   }

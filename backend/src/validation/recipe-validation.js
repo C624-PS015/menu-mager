@@ -1,9 +1,18 @@
 import Joi from "joi";
 
-const createValidation = Joi.object({
+const recipeValidation = Joi.object({
   name: Joi.string().max(100).required(),
   photo: Joi.string().max(100).required(),
   description: Joi.string().required(),
+  material: Joi.array()
+    .items(
+      Joi.object({
+        name: Joi.string().max(100).required(),
+        amount: Joi.number().required(),
+        unit: Joi.string().required(),
+      }),
+    )
+    .required(),
   allergy: Joi.array().items(
     Joi.object({
       name: Joi.string().max(100).required(),
@@ -16,22 +25,12 @@ const createValidation = Joi.object({
       }),
     )
     .required(),
+  instruction: Joi.array().items(
+    Joi.object({
+      step: Joi.number().required(),
+      description: Joi.string().required(),
+    }),
+  ),
 });
 
-const updateValidation = Joi.object({
-  name: Joi.string().max(100),
-  photo: Joi.string().max(100),
-  description: Joi.string(),
-  allergy: Joi.array().items(
-    Joi.object({
-      name: Joi.string().max(100).required(),
-    }),
-  ),
-  preferences: Joi.array().items(
-    Joi.object({
-      name: Joi.string().max(100).required(),
-    }),
-  ),
-}).or("name", "photo", "description", "allergy", "preferences");
-
-export { createValidation, updateValidation };
+export default recipeValidation;

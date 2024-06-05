@@ -8,7 +8,7 @@ const userAuthMiddleware = async (req, res, next) => {
       .status(401)
       .json({
         status: "fail",
-        message: "Unauthorized",
+        message: "unauthorized!",
       })
       .end();
   } else {
@@ -23,7 +23,7 @@ const userAuthMiddleware = async (req, res, next) => {
         .status(401)
         .json({
           status: "fail",
-          message: "Unauthorized",
+          message: "unauthorized!",
         })
         .end();
     }

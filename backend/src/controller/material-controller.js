@@ -1,11 +1,11 @@
-import recipeService from "../service/recipe-service.js";
+import materialService from "../service/material-service.js";
 
 const create = async (req, res, next) => {
   try {
-    const result = await recipeService.create(req);
+    const result = await materialService.create(req);
     res.status(201).json({
-      status: "success",
-      message: "success create recipe!",
+      success: "success",
+      message: "success create material!",
       data: {
         ...result,
       },
@@ -17,10 +17,10 @@ const create = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   try {
-    const result = await recipeService.update(req);
+    const result = await materialService.update(req);
     res.status(200).json({
       status: "success",
-      message: "success update recipe!",
+      message: "success update material!",
       data: {
         ...result,
       },
@@ -32,10 +32,10 @@ const update = async (req, res, next) => {
 
 const remove = async (req, res, next) => {
   try {
-    const result = await recipeService.remove(req);
+    const result = await materialService.remove(req);
     res.status(200).json({
       status: "success",
-      message: "success remove recipe!",
+      message: "success remove material!",
       data: {
         ...result,
       },
@@ -47,10 +47,10 @@ const remove = async (req, res, next) => {
 
 const getDetail = async (req, res, next) => {
   try {
-    const result = await recipeService.getDetail(req);
+    const result = await materialService.getDetail(req);
     res.status(200).json({
       status: "success",
-      message: "success get detail recipe!",
+      message: "success get detail material!",
       data: {
         ...result,
       },
@@ -62,10 +62,10 @@ const getDetail = async (req, res, next) => {
 
 const getAll = async (req, res, next) => {
   try {
-    const result = await recipeService.getAll(req);
+    const result = await materialService.getAll(req);
     res.status(200).json({
       status: "success",
-      message: "success get all recipe!",
+      message: "success get all materials!",
       data: {
         ...result,
       },

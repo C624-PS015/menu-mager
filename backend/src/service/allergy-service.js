@@ -1,27 +1,23 @@
 import validate from "../validation/validation.js";
 import allergyValidation from "../validation/allergy-validation.js";
 import prismaClient from "../application/database.js";
-import { ResponseError } from "../error/response-error.js";
-
-const isAllergyExist = async (param) => {
-  return prismaClient.allergy.count({
-    where: param,
-  });
-};
+import ResponseError from "../error/response-error.js";
 
 const create = async (request) => {
   const allergy = validate(allergyValidation, request.body);
 
-  const countAllergy = await isAllergyExist({ name: allergy.name });
+  const countAllergy = await prismaClient.allergy.count({
+    where: {
+      name: allergy.name,
+    },
+  });
 
   if (countAllergy === 1) {
     throw new ResponseError(409, "allergy already exists!");
   }
 
   return prismaClient.allergy.create({
-    data: {
-      name: allergy.name,
-    },
+    data: allergy,
     select: {
       id: true,
       name: true,
@@ -30,22 +26,38 @@ const create = async (request) => {
 };
 
 const update = async (request) => {
-  const id = request.params.id;
+  const id = Number(request.params.id);
+
   const allergy = validate(allergyValidation, request.body);
 
-  const countAllergy = await isAllergyExist({ id: id });
+  const countAllergy = await prismaClient.allergy.count({
+    where: {
+      id: id,
+    },
+  });
 
   if (countAllergy === 0) {
     throw new ResponseError(404, "allergy not found!");
+  }
+
+  const countSameAllergy = await prismaClient.allergy.count({
+    where: {
+      id: {
+        not: id,
+      },
+      name: allergy.name,
+    },
+  });
+
+  if (countSameAllergy) {
+    throw new ResponseError(409, "allergy already exist!");
   }
 
   return prismaClient.allergy.update({
     where: {
       id: id,
     },
-    data: {
-      name: allergy.name,
-    },
+    data: allergy,
     select: {
       id: true,
       name: true,
@@ -54,9 +66,13 @@ const update = async (request) => {
 };
 
 const remove = async (request) => {
-  const id = request.params.id;
+  const id = Number(request.params.id);
 
-  const countAllergy = await isAllergyExist({ id: id });
+  const countAllergy = await prismaClient.allergy.count({
+    where: {
+      id: id,
+    },
+  });
 
   if (countAllergy === 0) {
     throw new ResponseError(404, "allergy not found!");
@@ -74,9 +90,13 @@ const remove = async (request) => {
 };
 
 const getDetail = async (request) => {
-  const id = request.params.id;
+  const id = Number(request.params.id);
 
-  const countAllergy = await isAllergyExist({ id: id });
+  const countAllergy = await prismaClient.allergy.count({
+    where: {
+      id: id,
+    },
+  });
 
   if (countAllergy === 0) {
     throw new ResponseError(404, "allergy not found!");
@@ -90,8 +110,15 @@ const getDetail = async (request) => {
       id: true,
       name: true,
       recipe_allergy: {
-        include: {
-          recipe: true,
+        select: {
+          recipe: {
+            select: {
+              id: true,
+              name: true,
+              description: true,
+              photo: true,
+            },
+          },
         },
       },
     },

@@ -1,8 +1,8 @@
-# Preference API Spec
+# Material API Spec
 
-## Create preference API
+## Create material API
 
-Endpoint : POST /api/preference
+Endpoint : POST /api/material
 
 Request Body :
 
@@ -28,9 +28,9 @@ Response body success:
   },
   "body": {
     "status": "success",
-    "message": "success add preferences!",
+    "message": "success add material!",
     "data": {
-      "id": 1,
+      "id": "unique-id",
       "name": "example",
       "photo": "example.jpg"
     }
@@ -47,14 +47,14 @@ Response body error:
   },
   "body": {
     "status": "fail",
-    "message": "preferences already exists!"
+    "message": "material already exists!"
   }
 }
 ```
 
-## Update preference API
+## Update material API
 
-Endpoint : PUT /api/preference/:id
+Endpoint : PUT /api/material/:id
 
 Request body :
 
@@ -80,9 +80,9 @@ Response body success :
   },
   "body": {
     "status": "success",
-    "message": "success update preferences!",
+    "message": "success update material!",
     "data": {
-      "id": 1,
+      "id": "unique-id",
       "name": "example",
       "photo": "example.jpg"
     }
@@ -99,14 +99,14 @@ Response body error :
   },
   "body": {
     "status": "fail",
-    "message": "preferences not found!"
+    "message": "material not found!"
   }
 }
 ```
 
-## Remove preference API
+## Remove material API
 
-Endpoint : DELETE /api/preference/:id
+Endpoint : DELETE /api/material/:id
 
 Request body:
 
@@ -127,9 +127,9 @@ Response body success :
   },
   "body": {
     "status": "success",
-    "message": "success remove preferences!",
+    "message": "success remove material!",
     "data": {
-      "id": 1,
+      "id": "unique-id",
       "name": "example",
       "photo": "example.jpg"
     }
@@ -146,14 +146,14 @@ Response body error :
   },
   "body": {
     "status": "fail",
-    "message": "preferences not found!"
+    "message": "material not found!"
   }
 }
 ```
 
-## Get detail preference API
+## Get detail material API
 
-Endpoint : GET /api/preference/:id
+Endpoint : GET /api/material/:id
 
 Request body:
 
@@ -174,12 +174,12 @@ Response body success :
   },
   "body": {
     "status": "success",
-    "message": "success get detail preferences!",
+    "message": "success get detail material!",
     "data": {
-      "id": 1,
+      "id": "unique-id",
       "name": "example",
       "photo": "example.jpg",
-      "recipe_preferences": [
+      "recipe_material": [
         {
           "recipe": {
             "id": "unique-id",
@@ -203,13 +203,13 @@ Response body error :
   },
   "body": {
     "status": "fail",
-    "message": "preferences not found!"
+    "message": "material not found!"
   }
 }
 ```
-## Get all preference API
+## Get all material API
 
-Endpoint : GET /api/preference
+Endpoint : GET /api/material
 
 Response body success :
 
@@ -220,10 +220,10 @@ Response body success :
   },
   "body": {
     "status": "success",
-    "message": "success get all preferences!",
+    "message": "success get all material!",
     "data": [
       {
-        "id": 1, 
+        "id": "unique-id", 
         "name": "example",
         "photo": "example.jpg"
       }

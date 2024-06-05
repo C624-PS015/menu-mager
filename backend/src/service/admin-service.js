@@ -1,15 +1,15 @@
 import validate from "../validation/validation.js";
-import { loginValidation } from "../validation/admin-validation.js";
+import loginValidation from "../validation/admin-validation.js";
 import prismaClient from "../application/database.js";
 import bcrypt from "bcrypt";
-import { ResponseError } from "../error/response-error.js";
+import ResponseError from "../error/response-error.js";
 
 const login = async (request) => {
-  const loginRequest = validate(loginValidation, request);
+  const admin = validate(loginValidation, request.body);
 
-  const admin = await prismaClient.user.findUnique({
+  const findAdmin = await prismaClient.user.findUnique({
     where: {
-      email: loginRequest.email,
+      email: admin.email,
     },
     select: {
       email: true,
@@ -18,21 +18,21 @@ const login = async (request) => {
     },
   });
 
-  if (!admin) {
-    throw new ResponseError(401, "Email or password is incorrect!");
+  if (!findAdmin) {
+    throw new ResponseError(401, "email or password is incorrect!");
   }
 
   const isPasswordValid = await bcrypt.compare(
-    loginRequest.password,
     admin.password,
+    findAdmin.password,
   );
 
   if (!isPasswordValid) {
-    throw new ResponseError(401, "Email or password is incorrect!");
+    throw new ResponseError(401, "email or password is incorrect!");
   }
 
-  if (admin.role !== "admin") {
-    throw new ResponseError(401, "Access denied. Admins only!");
+  if (findAdmin.role !== "admin") {
+    throw new ResponseError(401, "access denied. Admins only!");
   }
 
   const token = crypto.randomUUID();

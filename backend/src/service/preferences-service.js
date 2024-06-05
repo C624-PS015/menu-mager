@@ -1,29 +1,22 @@
 import validate from "../validation/validation.js";
-import {
-  createValidation,
-  updateValidation,
-} from "../validation/preferences-validation.js";
+import preferencesValidation from "../validation/preferences-validation.js";
 import prismaClient from "../application/database.js";
 import deleteFileHelper from "../helper/delete-file-helper.js";
-import { ResponseError } from "../error/response-error.js";
-
-const isPreferencesExist = async (param) => {
-  return prismaClient.preferences.count({
-    where: param,
-  });
-};
+import ResponseError from "../error/response-error.js";
 
 const create = async (request) => {
   const payload = {
     name: request.body.name,
-    photo: request.file.filename,
+    photo: "/images/" + request.file.filename,
   };
 
-  const preferences = validate(createValidation, payload);
+  const preferences = validate(preferencesValidation, payload);
 
-  const countPreferences = await isPreferencesExist({ name: preferences.name });
-
-  preferences.photo = "/images/" + preferences.photo;
+  const countPreferences = await prismaClient.preferences.count({
+    where: {
+      name: preferences.name,
+    },
+  });
 
   if (countPreferences === 1) {
     await deleteFileHelper(preferences.photo);
@@ -31,10 +24,7 @@ const create = async (request) => {
   }
 
   return prismaClient.preferences.create({
-    data: {
-      name: preferences.name,
-      photo: preferences.photo,
-    },
+    data: preferences,
     select: {
       id: true,
       name: true,
@@ -44,13 +34,13 @@ const create = async (request) => {
 };
 
 const update = async (request) => {
-  const id = request.params.id;
+  const id = Number(request.params.id);
   const payload = {
     name: request.body.name,
-    photo: request.file.filename,
+    photo: "/images/" + request.file.filename,
   };
 
-  const preferences = validate(updateValidation, payload);
+  const preferences = validate(preferencesValidation, payload);
 
   const findPreferences = await prismaClient.preferences.findUnique({
     where: {
@@ -62,11 +52,23 @@ const update = async (request) => {
   });
 
   if (!findPreferences) {
+    await deleteFileHelper(preferences.photo);
     throw new ResponseError(404, "preferences not found!");
   }
 
-  if (preferences.photo) {
-    preferences.photo = "/images/" + preferences.photo;
+  const countPreferences = await prismaClient.preferences.count({
+    where: {
+      id: {
+        not: id,
+      },
+      name: preferences.name,
+    },
+  });
+
+  if (countPreferences === 1) {
+    await deleteFileHelper(preferences.photo);
+    throw new ResponseError(409, "preferences already exist!");
+  } else {
     await deleteFileHelper(findPreferences.photo);
   }
 
@@ -74,9 +76,7 @@ const update = async (request) => {
     where: {
       id: id,
     },
-    data: {
-      ...preferences,
-    },
+    data: preferences,
     select: {
       id: true,
       name: true,
@@ -86,11 +86,20 @@ const update = async (request) => {
 };
 
 const remove = async (request) => {
-  const id = request.params.id;
+  const id = Number(request.params.id);
 
-  const countPreferences = await isPreferencesExist({ id: id });
+  const findPreferences = await prismaClient.preferences.findUnique({
+    where: {
+      id: id,
+    },
+    select: {
+      photo: true,
+    },
+  });
 
-  if (countPreferences === 0) {
+  if (findPreferences) {
+    await deleteFileHelper(findPreferences.photo);
+  } else {
     throw new ResponseError(404, "preferences not found!");
   }
 
@@ -107,9 +116,13 @@ const remove = async (request) => {
 };
 
 const getDetail = async (request) => {
-  const id = request.params.id;
+  const id = Number(request.params.id);
 
-  const countPreferences = await isPreferencesExist({ id: id });
+  const countPreferences = await prismaClient.preferences.count({
+    where: {
+      id: id,
+    },
+  });
 
   if (countPreferences === 0) {
     throw new ResponseError(404, "preferences not found!");
@@ -124,8 +137,15 @@ const getDetail = async (request) => {
       name: true,
       photo: true,
       recipe_preferences: {
-        include: {
-          recipe: true,
+        select: {
+          recipe: {
+            select: {
+              id: true,
+              name: true,
+              description: true,
+              photo: true,
+            },
+          },
         },
       },
     },
