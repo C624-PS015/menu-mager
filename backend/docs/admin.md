@@ -2,7 +2,7 @@
 
 ## Login Admin API
 
-Endpoint :  POST /api/admin
+Endpoint :  POST /api/admin/login
 
 Request Body :
 
