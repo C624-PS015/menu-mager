@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 export function FilledButton({ children, onClick, className }) {
   return (
     <button
-      className={`btn btn-sm bg-accent text-white hover:bg-accent-hover ${className}`}
+      className={`btn btn-sm bg-primary text-white hover:bg-primary-hover ${className}`}
       onClick={onClick}
     >
       {children}

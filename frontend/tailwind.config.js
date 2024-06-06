@@ -16,15 +16,11 @@ export default {
         sans: ['Inter', 'sans-serif'],
       },
       colors: {
-        primary: '#1F384C',
-        secondary: '#273240',
-        accent: '#5A6ACF',
-        'accent-2': '#A6ABC8',
-        'accent-hover': '#4753a2',
-        customGray: '#082431',
+        primary: '#34bc85',
+        'primary-hover': '#2c9f6d',
       },
       backgroundColor: {
-        sidebar: '#F1F2F7',
+        sidebar: '#f0f8f7',
       },
     },
   },

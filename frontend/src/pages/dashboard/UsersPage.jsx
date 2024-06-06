@@ -1,8 +1,8 @@
-import { useLocation } from 'react-router-dom';
-import { useEffect, useId, useState } from 'react';
-import { useDebounce } from '@/hooks';
+import { useId, useState } from 'react';
+import { HiEye } from 'react-icons/hi';
+import { useFilterData } from '@/hooks';
 import { toggleModal } from '@/utils';
-import { OutlineButton, BaseTable, UserDetailModal } from '@/components';
+import { BaseTable, UserDetailModal, IconButton } from '@/components';
 import { LayoutSection } from '../../layouts';
 
 const USER_DATA = Array.from({ length: 10 }, (_, index) => ({
@@ -34,16 +34,14 @@ const USER_DATA = Array.from({ length: 10 }, (_, index) => ({
 }));
 
 export function UsersPage() {
-  const query = new URLSearchParams(useLocation().search).get('q');
   const modalId = useId();
-  const debouncedQuery = useDebounce(query, 500);
-  const [showModal] = toggleModal(modalId);
-  const [tableData, setTableData] = useState(USER_DATA);
   const [detailData, setDetailData] = useState(null);
+  const [showModal] = toggleModal(modalId);
+  const tableData = useFilterData(USER_DATA);
 
   // will be changed to fetch data from API
   const onUserView = (id) => {
-    const user = USER_DATA.find((user) => user.id === id);
+    const user = USER_DATA.find((selectedUser) => selectedUser.id === id);
     const newUserData = {
       avatar: {
         label: 'Avatar',
@@ -63,46 +61,41 @@ export function UsersPage() {
       },
       address: {
         label: 'Address',
-        value: `${user.address.detail_address}, ${user.address.village}, ${user.address.sub_district}, ${user.address.district}, ${user.address.province}, ${user.address.post_code}`,
+        value: [
+          user.address.detail_address,
+          user.address.village,
+          user.address.sub_district,
+          user.address.district,
+          user.address.province,
+          user.address.post_code,
+        ].join(', '),
       },
       active_subscription: {
         label: 'Active Subscription',
         value:
-          user.subscription.length > 0
-            ? user.subscription.map((sub) => sub.name).join(', ')
-            : 'No active subscription',
+          user.subscription.length > 0 ? user.subscription.map((sub) => sub.name).join(', ') : 'No active subscription',
       },
     };
     setDetailData(newUserData);
     showModal();
   };
 
-  useEffect(() => {
-    if (debouncedQuery) {
-      const filteredData = USER_DATA.filter((user) =>
-        user.name.toLowerCase().includes(debouncedQuery.toLowerCase())
-      );
-      setTableData(filteredData);
-    } else {
-      setTableData(USER_DATA);
-    }
-  }, [debouncedQuery]);
-
   return (
     <LayoutSection>
       <BaseTable heads={['No.', 'Name', 'Email', 'Phone', 'Action']}>
         {tableData &&
           tableData.map((user, index) => (
-            <tr
-              key={user.id}
-              className={`${index % 2 === 0 ? 'even' : 'odd'}`}
-            >
+            <tr key={user.id}>
               <td>{index + 1}</td>
               <td>{user.name}</td>
               <td>{user.email}</td>
               <td>{user.phone}</td>
               <td>
-                <OutlineButton onClick={() => onUserView(user.id)}>View</OutlineButton>
+                <IconButton
+                  label="View"
+                  icon={<HiEye className="text-gray-500" />}
+                  onClick={() => onUserView(user.id)}
+                />
               </td>
             </tr>
           ))}

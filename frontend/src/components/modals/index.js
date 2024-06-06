@@ -1,2 +1,2 @@
-export { BaseModal } from './BaseModal';
 export { UserDetailModal } from './UserDetailModal';
+export { RecipeDetailModal } from './RecipeDetailModal';

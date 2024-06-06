@@ -20,4 +20,11 @@ module.exports = {
     'import/no-unresolved': 'off',
     'import/extensions': 'off',
     'object-curly-newline': 'off',
+    'linebreak-style': 'off',
+    'implicit-arrow-linebreak': 'off',
+    'max-len': 'off',
+    'operator-linebreak': 'off',
+    'comma-dangle': 'off',
+    'no-param-reassign': 'off',
+  },
 };
