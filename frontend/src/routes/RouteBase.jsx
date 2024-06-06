@@ -12,6 +12,8 @@ import {
   LoginPage,
 } from '@/pages';
 import { SIDEBAR_ITEMS } from '@/constants';
+import { PrivateRoute } from './PrivateRoute';
+import { ProtectedRoute } from './ProtectedRoute';
 
 const getPageComponent = (title) => {
   switch (title) {
@@ -42,23 +44,27 @@ export const router = createBrowserRouter([
     element: (
       <Routes>
         <Route
-          index
-          element={
-            <LayoutDashboard>
-              <StatisticPage />
-            </LayoutDashboard>
-          }
+          path="/login"
+          element={<ProtectedRoute element={<LoginPage />} />}
         />
         <Route
-          path="/login"
-          element={<LoginPage />}
+          index
+          element={
+            <PrivateRoute
+              element={
+                <LayoutDashboard>
+                  <StatisticPage />
+                </LayoutDashboard>
+              }
+            />
+          }
         />
         {SIDEBAR_ITEMS.flatMap((category) =>
           category.items.map((item) => (
             <Route
               key={item.title}
               path={item.path.replace('/dashboard', '')}
-              element={<LayoutDashboard>{getPageComponent(item.title)}</LayoutDashboard>}
+              element={<PrivateRoute element={<LayoutDashboard>{getPageComponent(item.title)}</LayoutDashboard>} />}
             />
           ))
         )}
@@ -67,6 +73,6 @@ export const router = createBrowserRouter([
   },
   {
     path: '/*',
-    element: <Navigate to="/dashboard" />,
+    element: <Navigate to="/dashboard/login" />,
   },
 ]);
