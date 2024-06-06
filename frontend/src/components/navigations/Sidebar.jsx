@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { SidebarItem } from './SidebarItem';
+import Logo from '@/assets/logo.png';
 
 export function Sidebar({ items, active }) {
   return (
@@ -9,8 +10,14 @@ export function Sidebar({ items, active }) {
         className="drawer-overlay"
       />
       <div className="w-64 flex flex-col bg-sidebar h-screen">
-        <div className="flex items-center justify-center p-4 border-b border-[#C8CBD9]">
-          <h2 className="text-2xl font-semibold text-accent">Menu Mager</h2>
+        <div className="flex items-center justify-center px-6 py-4 h-20 border-b border-[#C8CBD9]">
+          <div className="flex items-center justify-center">
+            <img
+              src={Logo}
+              alt="logo"
+              className="object-contain h-10"
+            />
+          </div>
         </div>
         <div className="py-4 overflow-y-auto flex-grow">
           {items.map((group) => (

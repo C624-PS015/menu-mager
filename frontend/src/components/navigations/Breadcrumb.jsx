@@ -1,5 +1,4 @@
-import { NavLink } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 export function Breadcrumb() {
   const paths = useLocation()
@@ -19,7 +18,7 @@ export function Breadcrumb() {
             <NavLink
               to={`/${paths.slice(0, index + 1).join('/')}`}
               className={`capitalize ${
-                index === paths.length - 1 ? 'font-bold text-accent' : 'opacity-50 hover:opacity-80'
+                index === paths.length - 1 ? 'font-bold text-primary' : 'opacity-50 hover:opacity-80'
               }`}
             >
               {path}
