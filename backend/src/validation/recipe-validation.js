@@ -27,7 +27,6 @@ const recipeValidation = Joi.object({
     .required(),
   instruction: Joi.array().items(
     Joi.object({
-      step: Joi.number().required(),
       description: Joi.string().required(),
     }),
   ),

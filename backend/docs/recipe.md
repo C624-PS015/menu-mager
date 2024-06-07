@@ -16,23 +16,22 @@ Request Body :
     "name": "example",
     "description": "example",
     "photo": "example.jpg",
-    "recipe_preferences": [
+    "preferences": [
       {
         "name": "example"
       }
     ],
-    "recipe_allergy": [
+    "allergy": [
       {
         "name": "example"
       }
     ], 
-    "recipe_instruction": [
+    "instruction": [
       {
-        "step": 1,
         "description": "example"
       }
     ],
-    "recipe_material": [
+    "material": [
       {
         "name": "name",
         "amount": 2,
@@ -60,25 +59,26 @@ Response body success:
       "description": "example",
       "recipe_preferences": [
         {
-          "preferences": {
-            "id": 1,
-            "name": "example",
-            "photo": "example.jpg"
-          }
+          "preferences": 
+            {
+              "id": 1,
+              "name": "example",
+              "photo": "example.jpg"
+            }
         }
       ],
       "recipe_allergy": [
         {
-          "allergy": {
-            "id": 1,
-            "name": "example"
-          }
+        "allergy": 
+            {
+              "id": 1,
+              "name": "example"
+            }
         }
       ],
       "recipe_instruction": [
         {
-          "instruction": {
-            "step": 1,
+          "instruction":  {
             "description": "example"
           }
         }
@@ -127,23 +127,23 @@ Request body :
     "name": "example",
     "description": "example",
     "photo": "example.jpg",
-    "recipe_preferences": [
+    "preferences": [
       {
         "name": "example"
       }
     ],
-    "recipe_allergy": [
+    "allergy": [
       {
         "name": "example"
       }
     ],
-    "recipe_instruction": [
+    "instruction": [
       {
         "step": 1,
         "description": "example"
       }
     ],
-    "recipe_material": [
+    "material": [
       {
         "name": "name",
         "amount": 2,
@@ -388,6 +388,16 @@ Response body error :
 ## Get all recipe API
 
 Endpoint : GET /api/recipe
+
+Request body:
+
+```json
+{
+  "header": {
+    "Authorization": "Bearer <token>"
+  }
+}
+```
 
 Response body success :
 

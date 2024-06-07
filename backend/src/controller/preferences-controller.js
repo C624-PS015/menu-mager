@@ -62,7 +62,7 @@ const getDetail = async (req, res, next) => {
 
 const getAll = async (req, res, next) => {
   try {
-    const result = await preferencesService.getAll(req);
+    const result = await preferencesService.getAll();
     res.status(200).json({
       status: "success",
       message: "success get all preferences!",

@@ -1,11 +1,11 @@
-import materialService from "../service/material-service.js";
+import availableFoodService from "../service/available-food-service.js";
 
 const create = async (req, res, next) => {
   try {
-    const result = await materialService.create(req);
-    res.status(201).json({
-      success: "success",
-      message: "success create material!",
+    const result = await availableFoodService.create(req);
+    res.status(200).json({
+      status: "success",
+      message: "success add available food!",
       data: {
         ...result,
       },
@@ -17,10 +17,10 @@ const create = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   try {
-    const result = await materialService.update(req);
+    const result = await availableFoodService.update(req);
     res.status(200).json({
       status: "success",
-      message: "success update material!",
+      message: "success update available food!",
       data: {
         ...result,
       },
@@ -32,10 +32,10 @@ const update = async (req, res, next) => {
 
 const remove = async (req, res, next) => {
   try {
-    const result = await materialService.remove(req);
+    const result = await availableFoodService.remove(req);
     res.status(200).json({
       status: "success",
-      message: "success remove material!",
+      message: "success remove available food!",
       data: {
         ...result,
       },
@@ -47,10 +47,10 @@ const remove = async (req, res, next) => {
 
 const getDetail = async (req, res, next) => {
   try {
-    const result = await materialService.getDetail(req);
+    const result = await availableFoodService.getDetail(req);
     res.status(200).json({
       status: "success",
-      message: "success get detail material!",
+      message: "success get detail available food!",
       data: {
         ...result,
       },
@@ -62,10 +62,10 @@ const getDetail = async (req, res, next) => {
 
 const getAll = async (req, res, next) => {
   try {
-    const result = await materialService.getAll();
+    const result = await availableFoodService.getDetail();
     res.status(200).json({
       status: "success",
-      message: "success get all materials!",
+      message: "success get all available food!",
       data: result,
     });
   } catch (e) {
@@ -73,4 +73,10 @@ const getAll = async (req, res, next) => {
   }
 };
 
-export default { create, update, remove, getDetail, getAll };
+export default {
+  create,
+  update,
+  remove,
+  getDetail,
+  getAll,
+};

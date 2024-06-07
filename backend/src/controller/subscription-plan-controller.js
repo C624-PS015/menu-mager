@@ -3,7 +3,7 @@ import { request } from "express";
 
 const create = async (req, res, next) => {
   try {
-    const result = await subscriberPlanService.upsert(request);
+    const result = await subscriberPlanService.upsert(req);
     res.status(201).json({
       status: "success",
       message: "success create subscriber plan!",
@@ -18,7 +18,7 @@ const create = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   try {
-    const result = await subscriberPlanService.upsert(request);
+    const result = await subscriberPlanService.upsert(req);
     res.status(201).json({
       status: "success",
       message: "success update subscriber plan!",

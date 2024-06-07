@@ -127,9 +127,9 @@ const create = async (request) => {
         }),
       },
       instruction: {
-        create: recipe.instruction.map((instruction) => {
+        create: recipe.instruction.map((instruction, index) => {
           return {
-            step: Number(instruction.step),
+            step: index,
             description: instruction.description,
           };
         }),
@@ -226,9 +226,9 @@ const update = async (request) => {
       },
       instruction: {
         deleteMany: {},
-        create: recipe.instruction.map((instruction) => {
+        create: recipe.instruction.map((instruction, index) => {
           return {
-            step: Number(instruction.step),
+            step: index,
             description: instruction.description,
           };
         }),

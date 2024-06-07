@@ -4,14 +4,12 @@ import preferencesController from "../controller/preferences-controller.js";
 import recipeController from "../controller/recipe-controller.js";
 import materialController from "../controller/material-controller.js";
 import allergyController from "../controller/allergy-controller.js";
+import subscriptionPlanController from "../controller/subscription-plan-controller.js";
 
 // initiate publicRouter with Router function from express library
-const publicRouter = express.Router();
+const publicApi = express.Router();
 
-publicRouter.post("/api/admin/login", adminController.login);
-publicRouter.get("/api/preference", preferencesController.getAll);
-publicRouter.get("/api/recipe", recipeController.getAll);
-publicRouter.get("/api/material", materialController.getAll);
-publicRouter.get("/api/allergy", allergyController.getAll);
+publicApi.post("/api/admin/login", adminController.login);
+publicApi.get("/api/plan", subscriptionPlanController.get);
 
-export default publicRouter;
+export default publicApi;

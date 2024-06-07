@@ -62,13 +62,11 @@ const getDetail = async (req, res, next) => {
 
 const getAll = async (req, res, next) => {
   try {
-    const result = await recipeService.getAll(req);
+    const result = await recipeService.getAll();
     res.status(200).json({
       status: "success",
       message: "success get all recipe!",
-      data: {
-        ...result,
-      },
+      data: result,
     });
   } catch (e) {
     next(e);

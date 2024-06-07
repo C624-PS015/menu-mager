@@ -62,13 +62,11 @@ const getDetail = async (req, res, next) => {
 
 const getAll = async (req, res, next) => {
   try {
-    const result = await allergyService.getAll(req);
+    const result = await allergyService.getAll();
     res.status(200).json({
       status: "success",
       message: "success get all allergy!",
-      data: {
-        ...result,
-      },
+      data: result,
     });
   } catch (e) {
     next(e);

@@ -98,9 +98,9 @@ Response body success :
 }
 ```
 
-## Get detail allergy API
+## Get plan API
 
-Endpoint : GET /api/allergy/:id
+Endpoint : GET /api/plan
 
 Request body:
 

@@ -127,7 +127,8 @@ model SubscriptionPlanPreferences {
 
 model AvailableFood {
   id                    String                @id @default(uuid())
-  date                  DateTime
+  start_date            DateTime              @unique
+  end_date              DateTime              @unique
   created_at            DateTime              @default(now())
   updated_at            DateTime              @updatedAt
   available_food_recipe AvailableFoodRecipe[]
@@ -195,13 +196,14 @@ model RecipePreferences {
 }
 
 model Instruction {
-  id          String   @id @default(uuid())
-  recipe_id   String   @unique
-  step        Int      @unique
+  recipe_id   String
+  step        Int
   description String
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
   recipe      Recipe   @relation(references: [id], fields: [recipe_id])
+
+  @@id([recipe_id, step])
 }
 
 model Allergy {
