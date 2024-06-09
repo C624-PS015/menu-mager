@@ -70,9 +70,11 @@ const create = async (request) => {
 
   const recipe = validate(recipeValidation, payload);
 
+  console.log(recipe);
+
   const countRecipe = await prismaClient.recipe.count({
     where: {
-      name: name,
+      name: recipe.name,
     },
   });
 
@@ -89,7 +91,7 @@ const create = async (request) => {
       recipe_material: {
         create: recipe.material.map((material) => {
           return {
-            amount: Number(material.amount),
+            amount: material.amount,
             unit: material.unit,
             material: {
               connect: {

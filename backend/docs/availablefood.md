@@ -260,7 +260,7 @@ Response body success :
   },
   "body": {
     "status": "success",
-    "message": "success add available food!",
+    "message": "success get all available food!",
     "data": [
       {
         "id": "unique-id",
