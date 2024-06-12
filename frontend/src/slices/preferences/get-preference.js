@@ -1,38 +1,9 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { APIPreferences } from '@/apis/APIPreferences';
+import { APIPreferences } from '@/apis';
+import { createGetDetailSlice } from '../boilerplates';
 
-const initialState = {
-  status: 'idle',
-  message: '',
-  data: {},
-};
+const preferenceSlice = createGetDetailSlice('preference', APIPreferences.getPreference);
 
-export const getPreference = createAsyncThunk('preferences/getPreference', APIPreferences.getPreference);
+export const { fetchDetail: getPreference, resetState: resetPreferenceState } = preferenceSlice;
 
-const preferenceSlice = createSlice({
-  name: 'get-preference',
-  initialState,
-  reducers: {
-    resetGetPreferenceState: () => initialState,
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(getPreference.pending, (state) => {
-        state.status = 'loading';
-        state.message = '';
-      })
-      .addCase(getPreference.fulfilled, (state, { payload }) => {
-        state.status = 'success';
-        state.message = '';
-        state.data = payload;
-      })
-      .addCase(getPreference.rejected, (state, { error }) => {
-        state.status = 'failed';
-        state.message = error.message;
-      });
-  },
-});
-
-export const { resetGetPreferenceState } = preferenceSlice.actions;
-export const selectPreference = (state) => state.getPreference;
+export const selectPreference = preferenceSlice.select;
 export const preferenceReducer = preferenceSlice.reducer;

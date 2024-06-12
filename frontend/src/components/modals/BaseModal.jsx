@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types';
 
-export function BaseModal({ id, ref = null, title, children }) {
+export function BaseModal({ id, title, children }) {
   return (
     <dialog
       id={id}
-      ref={ref}
       className="modal"
     >
-      <div className="modal-box flex flex-col p-6 max-w-lg lg:max-w-2xl rounded-md shadow-md gap-10">
+      <div className="modal-box flex flex-col p-6 max-w-lg lg:max-w-2xl rounded-md shadow-md gap-2">
         <div className="modal-header flex items-center justify-between">
           <h2 className="text-2xl font-bold">{title}</h2>
           <form method="dialog">
@@ -28,7 +27,6 @@ export function BaseModal({ id, ref = null, title, children }) {
 
 BaseModal.propTypes = {
   id: PropTypes.string.isRequired,
-  ref: PropTypes.object,
   title: PropTypes.string,
   children: PropTypes.node.isRequired,
 };

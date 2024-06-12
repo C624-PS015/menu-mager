@@ -9,11 +9,11 @@ import {
   getPreferences,
   resetCreatePreferenceState,
   resetDeletePreferenceState,
-  resetGetPreferenceState,
-  resetGetPreferencesState,
+  resetPreferenceState,
+  resetPreferencesState,
+  resetUpdatePreferenceState,
   selectDeletePreference,
   selectPreferences,
-  selectUpdatePreference,
   updatePreference,
 } from '@/slices';
 import {
@@ -31,7 +31,6 @@ import { toggleModal } from '@/utils';
 export function PreferencesPage() {
   const { status, message, data } = useSelector(selectPreferences);
   const { status: deleteStatus } = useSelector(selectDeletePreference);
-  const { status: updateStatus } = useSelector(selectUpdatePreference);
 
   const viewModalId = useId();
   const createModalId = useId();
@@ -108,10 +107,11 @@ export function PreferencesPage() {
     dispatch(getPreferences());
 
     return () => {
-      dispatch(resetGetPreferencesState());
-      dispatch(resetGetPreferenceState());
       dispatch(resetCreatePreferenceState());
       dispatch(resetDeletePreferenceState());
+      dispatch(resetPreferencesState());
+      dispatch(resetPreferenceState());
+      dispatch(resetUpdatePreferenceState());
     };
   }, [dispatch]);
 

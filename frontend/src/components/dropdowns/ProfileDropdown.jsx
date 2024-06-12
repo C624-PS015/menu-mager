@@ -4,9 +4,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { HiChevronDown, HiChevronUp, HiCog, HiLogout, HiUser } from 'react-icons/hi';
-import { resetGetPreferencesState } from '@/slices';
 import { MenuButton } from '../buttons';
 import { useToast } from '@/hooks';
+import { resetAdminState } from '@/slices';
 
 export function ProfileDropdown({ avatar, name, email }) {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ export function ProfileDropdown({ avatar, name, email }) {
   const onLogout = () => {
     try {
       Cookies.remove('token');
-      dispatch(resetGetPreferencesState());
+      dispatch(resetAdminState());
       showToast('Logout success', 'success');
       navigate('/dashboard/login');
     } catch (error) {

@@ -1,38 +1,9 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { APIPreferences } from '@/apis/APIPreferences';
+import { APIPreferences } from '@/apis';
+import { createUpdateSlice } from '../boilerplates';
 
-const initialState = {
-  status: 'idle',
-  message: '',
-  data: {},
-};
+const updatePreferenceSlice = createUpdateSlice('update-preference', APIPreferences.updatePreference);
 
-export const updatePreference = createAsyncThunk('preferences/updatePreference', APIPreferences.updatePreference);
+export const { update: updatePreference, resetState: resetUpdatePreferenceState } = updatePreferenceSlice;
 
-const updatePreferenceSlice = createSlice({
-  name: 'update-preference',
-  initialState,
-  reducers: {
-    resetUpdatePreferenceState: () => initialState,
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(updatePreference.pending, (state) => {
-        state.status = 'loading';
-        state.message = '';
-      })
-      .addCase(updatePreference.fulfilled, (state, { payload }) => {
-        state.status = 'success';
-        state.message = 'Preference updated successfully';
-        state.data = payload;
-      })
-      .addCase(updatePreference.rejected, (state, { error }) => {
-        state.status = 'failed';
-        state.message = error.message;
-      });
-  },
-});
-
-export const { resetUpdatePreferenceState } = updatePreferenceSlice.actions;
-export const selectUpdatePreference = (state) => state.updatePreference;
+export const selectUpdatePreference = updatePreferenceSlice.select;
 export const updatePreferenceReducer = updatePreferenceSlice.reducer;

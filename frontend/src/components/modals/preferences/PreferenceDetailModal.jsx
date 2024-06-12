@@ -33,7 +33,7 @@ export function PreferenceDetailModal({ id }) {
             <ModalDataField
               label="Recipe Preferences"
               value={
-                data.recipe_preferences.length < 0
+                data.recipe_preferences?.length < 0
                   ? data.recipe_preferences.map((recipe) => recipe.recipe.name).join(', ')
                   : 'No recipe uses this preference'
               }

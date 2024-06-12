@@ -1,10 +1,10 @@
 import { AxiosError } from 'axios';
 import { instance } from '@/configs';
 
-export const APIPreferences = {
-  getPreferences: async () => {
+export const APIAllergies = {
+  getAllergies: async () => {
     try {
-      const response = await instance.get('/preference');
+      const response = await instance.get('/allergy');
       return response.data.data;
     } catch (err) {
       if (err instanceof AxiosError) {
@@ -14,9 +14,9 @@ export const APIPreferences = {
       }
     }
   },
-  getPreference: async ({ id }) => {
+  getAllergy: async ({ id }) => {
     try {
-      const response = await instance.get(`/preference/${id}`);
+      const response = await instance.get(`/allergy/${id}`);
       return response.data.data;
     } catch (err) {
       if (err instanceof AxiosError) {
@@ -26,17 +26,9 @@ export const APIPreferences = {
       }
     }
   },
-  createPreference: async ({ name, photo }) => {
+  createAllergy: async ({ name }) => {
     try {
-      const data = new FormData();
-      data.append('name', name);
-      data.append('photo', photo);
-
-      const response = await instance.post('/preference', data, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      const response = await instance.post('/allergy', { name });
       return response.data.data;
     } catch (err) {
       if (err instanceof AxiosError) {
@@ -46,17 +38,9 @@ export const APIPreferences = {
       }
     }
   },
-  updatePreference: async ({ id, name, photo }) => {
+  updateAllergy: async ({ id, name }) => {
     try {
-      const data = new FormData();
-      data.append('name', name);
-      data.append('photo', photo);
-
-      const response = await instance.put(`/preference/${id}`, data, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      const response = await instance.put(`/allergy/${id}`, { name });
       return response.data.data;
     } catch (err) {
       if (err instanceof AxiosError) {
@@ -66,9 +50,9 @@ export const APIPreferences = {
       }
     }
   },
-  deletePreference: async ({ id }) => {
+  deleteAllergy: async ({ id }) => {
     try {
-      const response = await instance.delete(`/preference/${id}`);
+      const response = await instance.delete(`/allergy/${id}`);
       return response.data.data;
     } catch (err) {
       if (err instanceof AxiosError) {

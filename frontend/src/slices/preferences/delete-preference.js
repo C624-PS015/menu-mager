@@ -1,38 +1,9 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { APIPreferences } from '@/apis/APIPreferences';
+import { APIPreferences } from '@/apis';
+import { createDeleteSlice } from '../boilerplates';
 
-const initialState = {
-  status: 'idle',
-  message: '',
-  data: {},
-};
+const deletePreferenceSlice = createDeleteSlice('delete-preference', APIPreferences.deletePreference);
 
-export const deletePreference = createAsyncThunk('preferences/createPreference', APIPreferences.deletePreference);
+export const { remove: deletePreference, resetState: resetDeletePreferenceState } = deletePreferenceSlice;
 
-const deletePreferenceSlice = createSlice({
-  name: 'delete-preference',
-  initialState,
-  reducers: {
-    resetDeletePreferenceState: () => initialState,
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(deletePreference.pending, (state) => {
-        state.status = 'loading';
-        state.message = '';
-      })
-      .addCase(deletePreference.fulfilled, (state, { payload }) => {
-        state.status = 'success';
-        state.message = 'Preference deleted successfully';
-        state.data = payload;
-      })
-      .addCase(deletePreference.rejected, (state, { error }) => {
-        state.status = 'failed';
-        state.message = error.message;
-      });
-  },
-});
-
-export const { resetDeletePreferenceState } = deletePreferenceSlice.actions;
-export const selectDeletePreference = (state) => state.deletePreference;
+export const selectDeletePreference = deletePreferenceSlice.select;
 export const deletePreferenceReducer = deletePreferenceSlice.reducer;

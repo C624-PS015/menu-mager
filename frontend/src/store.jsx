@@ -1,10 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import {
   adminReducer,
+  allergiesReducer,
+  allergyReducer,
+  createAllergyReducer,
   createPreferenceReducer,
+  deleteAllergyReducer,
   deletePreferenceReducer,
   preferenceReducer,
   preferencesReducer,
+  updateAllergyReducer,
   updatePreferenceReducer,
 } from './slices';
 
@@ -12,11 +17,17 @@ const store = configureStore({
   reducer: {
     admin: adminReducer,
 
-    getPreferences: preferencesReducer,
-    getPreference: preferenceReducer,
-    createPreference: createPreferenceReducer,
-    deletePreference: deletePreferenceReducer,
-    updatePreference: updatePreferenceReducer,
+    preferences: preferencesReducer,
+    preference: preferenceReducer,
+    'create-preference': createPreferenceReducer,
+    'delete-preference': deletePreferenceReducer,
+    'update-preference': updatePreferenceReducer,
+
+    allergies: allergiesReducer,
+    allergy: allergyReducer,
+    'create-allergy': createAllergyReducer,
+    'delete-allergy': deleteAllergyReducer,
+    'update-allergy': updateAllergyReducer,
   },
 });
 
