@@ -23,7 +23,7 @@ export function AllergyDetailModal({ id }) {
             value={
               data.recipe_allergies?.length < 0
                 ? data.recipe_allergies.map((recipe) => recipe.recipe.name).join(', ')
-                : 'No recipe uses this preference'
+                : 'No recipe uses this allergy'
             }
           />
         </div>

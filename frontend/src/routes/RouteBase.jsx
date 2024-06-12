@@ -11,6 +11,7 @@ import {
   UsersPage,
   LoginPage,
   AllergiesPage,
+  IngredientsPage,
 } from '@/pages';
 import { SIDEBAR_ITEMS } from '@/constants';
 import { PrivateRoute } from './PrivateRoute';
@@ -32,6 +33,8 @@ const getPageComponent = (title) => {
       return <PreferencesPage />;
     case 'Allergies':
       return <AllergiesPage />;
+    case 'Ingredients':
+      return <IngredientsPage />;
     default:
       return (
         <div>

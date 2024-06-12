@@ -7,6 +7,7 @@ import {
   HiOutlineReceiptTax,
   HiOutlineShoppingCart,
   HiOutlineUserGroup,
+  HiOutlineViewBoards,
 } from 'react-icons/hi';
 
 export const SIDEBAR_ITEMS = [
@@ -52,6 +53,11 @@ export const SIDEBAR_ITEMS = [
         title: 'Recipes',
         path: '/dashboard/recipes',
         icon: HiOutlineClipboardList,
+      },
+      {
+        title: 'Ingredients',
+        path: '/dashboard/ingredients',
+        icon: HiOutlineViewBoards,
       },
       {
         title: 'Preferences',
