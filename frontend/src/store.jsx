@@ -1,10 +1,22 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { adminReducer, preferencesReducer } from './slices';
+import {
+  adminReducer,
+  createPreferenceReducer,
+  deletePreferenceReducer,
+  preferenceReducer,
+  preferencesReducer,
+  updatePreferenceReducer,
+} from './slices';
 
 const store = configureStore({
   reducer: {
     admin: adminReducer,
-    preferences: preferencesReducer,
+
+    getPreferences: preferencesReducer,
+    getPreference: preferenceReducer,
+    createPreference: createPreferenceReducer,
+    deletePreference: deletePreferenceReducer,
+    updatePreference: updatePreferenceReducer,
   },
 });
 

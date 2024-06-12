@@ -1,11 +1,12 @@
 import {
-  HiOutlineShoppingCart,
-  HiOutlineArchive,
-  HiOutlineUserGroup,
   HiOutlineAnnotation,
-  HiOutlineClipboardList,
-  HiOutlineReceiptTax,
+  HiOutlineArchive,
   HiOutlineChartBar,
+  HiOutlineClipboardList,
+  HiOutlineHeart,
+  HiOutlineReceiptTax,
+  HiOutlineShoppingCart,
+  HiOutlineUserGroup,
 } from 'react-icons/hi';
 
 export const SIDEBAR_ITEMS = [
@@ -55,6 +56,11 @@ export const SIDEBAR_ITEMS = [
       {
         title: 'Preferences',
         path: '/dashboard/preferences',
+        icon: HiOutlineHeart,
+      },
+      {
+        title: 'Allergies',
+        path: '/dashboard/allergies',
         icon: HiOutlineAnnotation,
       },
     ],

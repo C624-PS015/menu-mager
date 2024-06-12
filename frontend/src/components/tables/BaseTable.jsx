@@ -11,7 +11,7 @@ export function BaseTable({ heads = [], children, columnWidths = [], addButtonPr
             {columnWidths.map((width, index) => (
               <col
                 key={index}
-                className={width ? `w-[${width}]` : 'w-auto'}
+                width={width}
               />
             ))}
           </colgroup>

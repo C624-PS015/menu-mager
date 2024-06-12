@@ -10,7 +10,7 @@ const initialState = {
 export const getPreferences = createAsyncThunk('preferences/getPreferences', APIPreferences.getPreferences);
 
 const preferencesSlice = createSlice({
-  name: 'preferences',
+  name: 'get-preferences',
   initialState,
   reducers: {
     resetGetPreferencesState: () => initialState,
@@ -34,5 +34,5 @@ const preferencesSlice = createSlice({
 });
 
 export const { resetGetPreferencesState } = preferencesSlice.actions;
-export const selectPreferences = (state) => state.preferences;
+export const selectPreferences = (state) => state.getPreferences;
 export const preferencesReducer = preferencesSlice.reducer;

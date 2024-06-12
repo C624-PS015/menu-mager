@@ -4,7 +4,7 @@ export function ModalDataField({ label, value }) {
   return (
     <div className="flex flex-col align-start align-start gap-1">
       <p className="font-semibold text-md lg:text-lg capitalize">{label}</p>
-      <p className="text-xs lg:text-md">{value}</p>
+      <p className="text-xs lg:text-md capitalize">{value}</p>
     </div>
   );
 }

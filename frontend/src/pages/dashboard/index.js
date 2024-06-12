@@ -1,3 +1,4 @@
+export { AllergiesPage } from './AllergiesPage';
 export { DeliveriesPage } from './DeliveriesPage';
 export { LoginPage } from './LoginPage';
 export { PlansPage } from './PlansPage';
