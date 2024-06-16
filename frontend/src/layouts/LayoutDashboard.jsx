@@ -16,7 +16,7 @@ export function LayoutDashboard({ children }) {
         type="checkbox"
         className="drawer-toggle"
       />
-      <div className="drawer-content">
+      <div className="drawer-content ml-0 lg:ml-64">
         <HeaderPage />
         <main className="overflow-y-auto px-6 py-5 flex flex-col gap-2">
           <h1 className="text-2xl font-bold text-primary mb-5">{currentTitle}</h1>

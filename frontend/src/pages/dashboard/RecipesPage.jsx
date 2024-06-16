@@ -1,95 +1,171 @@
 import { HiEye, HiPencil, HiTrash } from 'react-icons/hi';
-import { useId, useState } from 'react';
-import { BaseTable, IconButton, RecipeDetailModal } from '@/components';
+import { useEffect, useId, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  BaseTable,
+  DeleteConfirmModal,
+  IconButton,
+  RecipeCreateModal,
+  RecipeDetailModal,
+  RecipeUpdateModal,
+  Spinner,
+} from '@/components';
 import { LayoutSection } from '@/layouts';
 import { toggleModal } from '@/utils';
-import { useFilterData } from '@/hooks';
+import { useFilterData, useToast } from '@/hooks';
 
-const RECIPES_DATA = Array.from({ length: 10 }, (_, index) => ({
-  id: `recipe-${index + 1}`,
-  name: `Recipe ${index + 1}`,
-  price: 10000 + index * 1000,
-  photo: `https://dummyimage.com/600x400/000/fff&text=Recipe+${index + 1}`,
-  description: `This is a description for Recipe ${index + 1}`,
-  created_at: new Date(),
-  updated_at: new Date(),
-  available_food_recipe: [],
-  recipe_allergy: [],
-  recipe_material: [],
-  recipe_preferences: ['Vegetarian', 'Vegan', 'Gluten Free'],
-  instruction: [],
-  subscription_delivery_recipe: [],
-}));
+import {
+  createRecipe,
+  deleteRecipe,
+  getAllergies,
+  getIngredients,
+  getPreferences,
+  getRecipe,
+  getRecipes,
+  resetAllergiesState,
+  resetCreateRecipeState,
+  resetDeleteRecipeState,
+  resetIngredientsState,
+  resetPreferencesState,
+  resetRecipesState,
+  resetUpdateRecipeState,
+  selectDeleteRecipe,
+  selectRecipes,
+  updateRecipe,
+} from '@/slices';
 
 export function RecipesPage() {
-  const modalId = useId();
-  const [showModal] = toggleModal(modalId);
-  const tableData = useFilterData(RECIPES_DATA);
-  const [detailData, setDetailData] = useState(null);
+  const { status, message, data } = useSelector(selectRecipes);
+  const { status: deleteStatus } = useSelector(selectDeleteRecipe);
 
-  // will be changed to fetch data from API
-  const onRecipeView = (id) => {
-    const recipe = RECIPES_DATA.find((selectedRecipe) => selectedRecipe.id === id);
-    const newRecipeData = {
-      avatar: {
-        label: 'Photo',
-        value: recipe.photo,
-      },
-      name: {
-        label: 'Name',
-        value: recipe.name,
-      },
-      description: {
-        label: 'Description',
-        value: recipe.description,
-      },
-      price: {
-        label: 'Price',
-        value: recipe.price,
-      },
-      recipe_preferences: {
-        label: 'Preferences',
-        value: recipe.recipe_preferences.join(', '),
-      },
-    };
-    setDetailData(newRecipeData);
-    showModal();
+  const viewModalId = useId();
+  const createModalId = useId();
+  const deleteModalId = useId();
+  const updateModalId = useId();
+
+  const dispatch = useDispatch();
+  const showToast = useToast();
+  const tableData = useFilterData(data);
+
+  const [showViewModal] = toggleModal(viewModalId);
+  const [showCreateModal, hideCreateModal] = toggleModal(createModalId);
+  const [showDeleteModal, hideDeleteModal] = toggleModal(deleteModalId);
+  const [showUpdateModal, hideUpdateModal] = toggleModal(updateModalId);
+
+  const [selectedId, setSelectedId] = useState(null);
+
+  const handleViewRecipe = (id) => {
+    dispatch(getRecipe({ id }));
+    showViewModal();
   };
+
+  const openDeleteModal = (id) => {
+    setSelectedId(id);
+    showDeleteModal();
+  };
+
+  const openUpdateModal = (id) => {
+    dispatch(getRecipe({ id }));
+    setSelectedId(id);
+    showUpdateModal();
+  };
+
+  const handleCreateRecipe = (recipeData) => {
+    dispatch(createRecipe(recipeData)).then((result) => {
+      if (createRecipe.fulfilled.match(result)) {
+        showToast('Recipe created successfully', 'success');
+        hideCreateModal();
+        dispatch(getRecipes());
+      } else if (createRecipe.rejected.match(result)) {
+        const error = result.payload || result.error.message;
+        showToast(error, 'error');
+      }
+    });
+  };
+
+  const handleDeleteRecipe = () => {
+    dispatch(deleteRecipe({ id: selectedId })).then((result) => {
+      if (deleteRecipe.fulfilled.match(result)) {
+        showToast('Recipe deleted successfully', 'success');
+        hideDeleteModal();
+        dispatch(getRecipes());
+      } else if (deleteRecipe.rejected.match(result)) {
+        const error = result.payload || result.error.message;
+        showToast(error, 'error');
+      }
+    });
+  };
+
+  const handleUpdateRecipe = (recipeData) => {
+    recipeData.instruction = recipeData.instruction.map((step) => {
+      const { step: _, ...rest } = step;
+      return rest;
+    });
+
+    dispatch(updateRecipe({ ...recipeData, id: selectedId })).then((result) => {
+      if (updateRecipe.fulfilled.match(result)) {
+        showToast('Recipe updated successfully', 'success');
+        hideUpdateModal();
+        dispatch(getRecipes());
+      } else if (updateRecipe.rejected.match(result)) {
+        const error = result.payload || result.error.message;
+        showToast(error, 'error');
+      }
+    });
+  };
+
+  useEffect(() => {
+    dispatch(getRecipes());
+    dispatch(getPreferences());
+    dispatch(getAllergies());
+    dispatch(getIngredients());
+
+    return () => {
+      dispatch(resetRecipesState());
+      dispatch(resetDeleteRecipeState());
+      dispatch(resetUpdateRecipeState());
+      dispatch(resetCreateRecipeState());
+
+      dispatch(resetPreferencesState());
+      dispatch(resetAllergiesState());
+      dispatch(resetIngredientsState());
+    };
+  }, [dispatch]);
 
   return (
     <LayoutSection>
       <BaseTable
-        heads={['No.', 'Name', 'Preferences', 'Price', 'Action']}
-        columnWidths={[null, null, null, null, null]}
-        addButtonProps={{ show: true, text: 'Add Recipe', onClick: () => {} }}
+        heads={['No.', 'Name', 'Description', 'Actions']}
+        columnWidths={['10%', '30%', '40%', '20%']}
+        addButtonProps={{ show: true, text: 'Add Recipe', onClick: showCreateModal }}
       >
-        {tableData &&
+        {status === 'success' &&
+          tableData.length > 0 &&
           tableData.map((recipe, index) => (
             <tr key={recipe.id}>
               <td>{index + 1}</td>
               <td>{recipe.name}</td>
-              <td>{recipe.recipe_preferences.join(', ')}</td>
-              <td>{recipe.price}</td>
+              <td>{recipe.description}</td>
               <td className="flex justify-center gap-1">
                 <IconButton
                   label="View"
                   icon={<HiEye className="text-gray-500" />}
-                  onClick={() => onRecipeView(recipe.id)}
+                  onClick={() => handleViewRecipe(recipe.id)}
                 />
                 <IconButton
                   label="Edit"
                   icon={<HiPencil className="text-blue-500" />}
-                  onClick={() => {}}
+                  onClick={() => openUpdateModal(recipe.id)}
                 />
                 <IconButton
                   label="Delete"
                   icon={<HiTrash className="text-red-500" />}
-                  onClick={() => {}}
+                  onClick={() => openDeleteModal(recipe.id)}
                 />
               </td>
             </tr>
           ))}
-        {tableData.length === 0 && (
+        {status === 'success' && tableData.length === 0 && (
           <tr>
             <td
               colSpan={5}
@@ -99,11 +175,42 @@ export function RecipesPage() {
             </td>
           </tr>
         )}
+        {status === 'loading' && (
+          <tr>
+            <td
+              colSpan={5}
+              className="h-80"
+            >
+              <Spinner />
+            </td>
+          </tr>
+        )}
+        {status === 'failed' && (
+          <tr>
+            <td
+              colSpan={5}
+              className="text-center py-4 text-red-500"
+            >
+              {message}
+            </td>
+          </tr>
+        )}
       </BaseTable>
 
-      <RecipeDetailModal
-        id={modalId}
-        data={detailData}
+      <RecipeDetailModal id={viewModalId} />
+      <RecipeCreateModal
+        id={createModalId}
+        onSubmit={handleCreateRecipe}
+      />
+      <DeleteConfirmModal
+        id={deleteModalId}
+        title="Delete Recipe"
+        status={deleteStatus}
+        onSubmit={handleDeleteRecipe}
+      />
+      <RecipeUpdateModal
+        id={updateModalId}
+        onSubmit={handleUpdateRecipe}
       />
     </LayoutSection>
   );

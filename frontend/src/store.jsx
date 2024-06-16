@@ -6,16 +6,21 @@ import {
   createAllergyReducer,
   createIngredientReducer,
   createPreferenceReducer,
+  createRecipeReducer,
   deleteAllergyReducer,
   deleteIngredientReducer,
   deletePreferenceReducer,
+  deleteRecipeReducer,
   ingredientReducer,
   ingredientsReducer,
   preferenceReducer,
   preferencesReducer,
+  recipeReducer,
+  recipesReducer,
   updateAllergyReducer,
   updateIngredientReducer,
   updatePreferenceReducer,
+  updateRecipeReducer,
 } from './slices';
 
 const store = configureStore({
@@ -39,6 +44,12 @@ const store = configureStore({
     'create-ingredient': createIngredientReducer,
     'delete-ingredient': deleteIngredientReducer,
     'update-ingredient': updateIngredientReducer,
+
+    recipes: recipesReducer,
+    recipe: recipeReducer,
+    'create-recipe': createRecipeReducer,
+    'delete-recipe': deleteRecipeReducer,
+    'update-recipe': updateRecipeReducer,
   },
 });
 
