@@ -5,14 +5,13 @@ import ResponseError from "../error/response-error.js";
 
 const upsert = async (request) => {
   const subscriberPlan = validate(subscriberPlanValidation, request.body);
-
   return prismaClient.subscriptionPlan.upsert({
     where: {
       id: 1,
     },
     create: {
       id: 1,
-      price_per_serving: Number(subscriberPlan.pricePerServing),
+      price_per_serving: subscriberPlan.pricePerServing,
       subscription_plan_preferences: {
         create: subscriberPlan.preferences.map((preference) => {
           return {
@@ -41,7 +40,6 @@ const upsert = async (request) => {
       },
     },
     select: {
-      id: true,
       price_per_serving: true,
       subscription_plan_preferences: {
         select: {
@@ -71,7 +69,6 @@ const get = async () => {
 
   return prismaClient.subscriptionPlan.findFirst({
     select: {
-      id: true,
       price_per_serving: true,
       subscription_plan_preferences: {
         select: {

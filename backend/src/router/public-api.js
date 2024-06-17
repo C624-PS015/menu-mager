@@ -1,9 +1,5 @@
 import express from "express";
 import adminController from "../controller/admin-controller.js";
-import preferencesController from "../controller/preferences-controller.js";
-import recipeController from "../controller/recipe-controller.js";
-import materialController from "../controller/material-controller.js";
-import allergyController from "../controller/allergy-controller.js";
 import subscriptionPlanController from "../controller/subscription-plan-controller.js";
 
 // initiate publicRouter with Router function from express library

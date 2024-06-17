@@ -5,7 +5,7 @@ const subscriberValidation = Joi.object({
   preferences: Joi.array().items(
     Joi.object({
       name: Joi.string().max(50).required(),
-    }),
+    })
   ),
 });
 

@@ -1,7 +1,7 @@
 import prismaClient from "../application/database.js";
 
 const userAuthMiddleware = async (req, res, next) => {
-  const token = req.get("Authorization").split(" ")[1];
+  const token = req.get("Authorization")?.split(" ")[1];
 
   if (!token) {
     res

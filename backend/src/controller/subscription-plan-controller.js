@@ -1,5 +1,4 @@
 import subscriberPlanService from "../service/subscriber-plan-service.js";
-import { request } from "express";
 
 const create = async (req, res, next) => {
   try {

@@ -8,26 +8,48 @@ import allergyController from "../controller/allergy-controller.js";
 
 const userApi = express.Router();
 
-userApi.use(userAuthMiddleware);
-
 // preferences
-userApi.get("/api/preference/:id", preferencesController.getDetail);
-userApi.get("/api/preference", preferencesController.getAll);
+userApi.get(
+  "/api/preference/:id",
+  userAuthMiddleware,
+  preferencesController.getDetail
+);
+userApi.get(
+  "/api/preference",
+  userAuthMiddleware,
+  preferencesController.getAll
+);
 
 // recipe
-userApi.get("/api/recipe/:id", recipeController.getDetail);
+userApi.get("/api/recipe/:id", userAuthMiddleware, recipeController.getDetail);
 userApi.get("/api/recipe", recipeController.getAll);
 
 // material
-userApi.get("/api/material/:id", materialController.getDetail);
-userApi.get("/api/material", materialController.getAll);
+userApi.get(
+  "/api/material/:id",
+  userAuthMiddleware,
+  materialController.getDetail
+);
+userApi.get("/api/material", userAuthMiddleware, materialController.getAll);
 
 // allergy
-userApi.get("/api/allergy/:id", allergyController.getDetail);
-userApi.get("/api/allergy", allergyController.getAll);
+userApi.get(
+  "/api/allergy/:id",
+  userAuthMiddleware,
+  allergyController.getDetail
+);
+userApi.get("/api/allergy", userAuthMiddleware, allergyController.getAll);
 
 // available food
-userApi.get("api/availablefood/:id", availableFoodController.getDetail);
-userApi.get("api/availablefood", availableFoodController.getAll);
+userApi.get(
+  "api/availablefood/:id",
+  userAuthMiddleware,
+  availableFoodController.getDetail
+);
+userApi.get(
+  "api/availablefood",
+  userAuthMiddleware,
+  availableFoodController.getAll
+);
 
 export default userApi;

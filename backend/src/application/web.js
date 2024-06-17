@@ -16,5 +16,4 @@ app.use(adminApi);
 app.use(userApi);
 
 app.use(errorMiddleware);
-
 export default app;
