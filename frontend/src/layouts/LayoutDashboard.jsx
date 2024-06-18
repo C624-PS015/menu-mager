@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import { Sidebar, HeaderPage } from '@/components';
-import { SIDEBAR_ITEMS } from '@/constants';
+import { DASHBOARD_URLS } from '@/constants';
 
 export function LayoutDashboard({ children }) {
   const currPath = useLocation().pathname;
-  const currentTitle = SIDEBAR_ITEMS.find((group) => group.items.some((item) => item.path === currPath)).items.find(
+  const currentTitle = DASHBOARD_URLS.find((group) => group.items.some((item) => item.path === currPath)).items.find(
     (item) => item.path === currPath
   ).title;
 
@@ -24,7 +24,7 @@ export function LayoutDashboard({ children }) {
         </main>
       </div>
       <Sidebar
-        items={SIDEBAR_ITEMS}
+        items={DASHBOARD_URLS}
         active={currentTitle}
       />
     </div>

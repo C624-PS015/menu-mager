@@ -11,7 +11,7 @@ import {
   NotFoundPage,
   DashboardPage,
 } from '@/pages';
-import { SIDEBAR_ITEMS } from '@/constants';
+import { DASHBOARD_URLS } from '@/constants';
 import { PrivateRoute } from './PrivateRoute';
 import { ProtectedRoute } from './ProtectedRoute';
 
@@ -49,7 +49,7 @@ export const router = createBrowserRouter([
             />
           }
         />
-        {SIDEBAR_ITEMS.flatMap((category) =>
+        {DASHBOARD_URLS.flatMap((category) =>
           category.items.map((item) => (
             <Route
               key={item.title}

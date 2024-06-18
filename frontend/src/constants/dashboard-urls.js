@@ -8,7 +8,7 @@ import {
   HiOutlineViewBoards,
 } from 'react-icons/hi';
 
-export const SIDEBAR_ITEMS = [
+export const DASHBOARD_URLS = [
   {
     category: 'Business',
     items: [
