@@ -1,7 +1,7 @@
 import { APIPlans } from '@/apis';
 import { createUpdateSlice } from '../boilerplates';
 
-const updatePlanSlice = createUpdateSlice('update-plan', APIPlans.updatePlan);
+const updatePlanSlice = createUpdateSlice('update-plan', APIPlans.updateMealPlan);
 
 export const { update: updatePlan, resetState: resetUpdatePlanState } = updatePlanSlice;
 

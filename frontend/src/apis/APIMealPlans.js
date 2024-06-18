@@ -1,8 +1,8 @@
 import { AxiosError } from 'axios';
 import { instance } from '@/configs';
 
-export const APIPlans = {
-  getPlans: async () => {
+export const APIMealPlans = {
+  getMealPlans: async () => {
     try {
       const response = await instance.get('/availablefood');
       return response.data.data;
@@ -14,7 +14,7 @@ export const APIPlans = {
       }
     }
   },
-  getPlan: async ({ id }) => {
+  getMealPlan: async ({ id }) => {
     try {
       const response = await instance.get(`/availablefood/${id}`);
       return response.data.data;
@@ -26,7 +26,7 @@ export const APIPlans = {
       }
     }
   },
-  createPlan: async ({ startDate, recipe }) => {
+  createMealPlan: async ({ startDate, recipe }) => {
     try {
       const response = await instance.post('/availablefood', { startDate, recipe });
       return response.data.data;
@@ -38,7 +38,7 @@ export const APIPlans = {
       }
     }
   },
-  updatePlan: async ({ id, startDate, recipe }) => {
+  updateMealPlan: async ({ id, startDate, recipe }) => {
     try {
       const response = await instance.put(`/availablefood/${id}`, { startDate, recipe });
       return response.data.data;
@@ -50,7 +50,7 @@ export const APIPlans = {
       }
     }
   },
-  deletePlan: async ({ id }) => {
+  deleteMealPlan: async ({ id }) => {
     try {
       const response = await instance.delete(`/availablefood/${id}`);
       return response.data.data;

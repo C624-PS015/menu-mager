@@ -1,7 +1,7 @@
 import { APIPlans } from '@/apis';
 import { createGetDetailSlice } from '../boilerplates';
 
-const planSlice = createGetDetailSlice('plan', APIPlans.getPlan);
+const planSlice = createGetDetailSlice('plan', APIPlans.getMealPlan);
 
 export const { fetchDetail: getPlan, resetState: resetPlanState } = planSlice;
 

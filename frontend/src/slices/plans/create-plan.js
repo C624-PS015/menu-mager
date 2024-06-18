@@ -1,7 +1,7 @@
 import { APIPlans } from '@/apis';
 import { createCreateSlice } from '../boilerplates';
 
-const createPlanSlice = createCreateSlice('create-plan', APIPlans.createPlan);
+const createPlanSlice = createCreateSlice('create-plan', APIPlans.createMealPlan);
 
 export const { create: createPlan, resetState: resetCreatePlanState } = createPlanSlice;
 
