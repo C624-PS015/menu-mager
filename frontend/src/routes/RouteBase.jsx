@@ -1,7 +1,6 @@
 import { Route, Routes, createBrowserRouter } from 'react-router-dom';
 import { LayoutDashboard } from '@/layouts';
 import {
-  StatisticPage,
   PlansPage,
   PreferencesPage,
   RecipesPage,
@@ -10,6 +9,7 @@ import {
   AllergiesPage,
   IngredientsPage,
   NotFoundPage,
+  DashboardPage,
 } from '@/pages';
 import { SIDEBAR_ITEMS } from '@/constants';
 import { PrivateRoute } from './PrivateRoute';
@@ -43,7 +43,7 @@ export const router = createBrowserRouter([
             <PrivateRoute
               element={
                 <LayoutDashboard>
-                  <StatisticPage />
+                  <DashboardPage />
                 </LayoutDashboard>
               }
             />

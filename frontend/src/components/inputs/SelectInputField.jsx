@@ -33,6 +33,7 @@ export const SelectInputField = forwardRef(
                 valueContainer: (provided) => ({
                   ...provided,
                   paddingBlock: '0.5em',
+                  paddingInline: '0',
                 }),
                 placeholder: (provided) => ({
                   ...provided,
@@ -42,6 +43,10 @@ export const SelectInputField = forwardRef(
                   ...provided,
                   maxHeight: 'calc(1.5em * 4)',
                   overflowX: 'auto',
+                }),
+                dropdownIndicator: (provided) => ({
+                  ...provided,
+                  paddingRight: '0',
                 }),
               }}
               menuPlacement="auto"
