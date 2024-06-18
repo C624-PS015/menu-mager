@@ -12,12 +12,12 @@ const userApi = express.Router();
 userApi.get(
   "/api/preference/:id",
   userAuthMiddleware,
-  preferencesController.getDetail
+  preferencesController.getDetail,
 );
 userApi.get(
   "/api/preference",
   userAuthMiddleware,
-  preferencesController.getAll
+  preferencesController.getAll,
 );
 
 // recipe
@@ -28,7 +28,7 @@ userApi.get("/api/recipe", recipeController.getAll);
 userApi.get(
   "/api/material/:id",
   userAuthMiddleware,
-  materialController.getDetail
+  materialController.getDetail,
 );
 userApi.get("/api/material", userAuthMiddleware, materialController.getAll);
 
@@ -36,7 +36,7 @@ userApi.get("/api/material", userAuthMiddleware, materialController.getAll);
 userApi.get(
   "/api/allergy/:id",
   userAuthMiddleware,
-  allergyController.getDetail
+  allergyController.getDetail,
 );
 userApi.get("/api/allergy", userAuthMiddleware, allergyController.getAll);
 
@@ -44,12 +44,12 @@ userApi.get("/api/allergy", userAuthMiddleware, allergyController.getAll);
 userApi.get(
   "api/availablefood/:id",
   userAuthMiddleware,
-  availableFoodController.getDetail
+  availableFoodController.getDetail,
 );
 userApi.get(
   "api/availablefood",
   userAuthMiddleware,
-  availableFoodController.getAll
+  availableFoodController.getAll,
 );
 
 export default userApi;

@@ -28,7 +28,7 @@ model Address {
   province       String   @db.VarChar(50)
   district       String   @db.VarChar(50)
   sub_district   String   @db.VarChar(50)
-  post_code      String   @db.VarChar(50)
+  post_code      String   @db.VarChar(5)
   village        String   @db.VarChar(50)
   rt             Int
   rw             Int
@@ -41,8 +41,8 @@ model Address {
 model Subscription {
   id                  String              @id @default(uuid())
   user_id             String
-  is_pay              Boolean             @default(false)
-  is_active           Boolean             @default(false)
+  is_pay              Boolean             @default(true)
+  is_active           Boolean             @default(true)
   user                User                @relation(references: [id], fields: [user_id])
   subscription_detail SubscriptionDetail?
 }
@@ -82,7 +82,7 @@ model SubscriptionDelivery {
   id                           String                       @id @default(uuid())
   subscription_detail_id       String
   date                         DateTime
-  status                       String                       @db.VarChar(20)
+  status                       String                       @db.VarChar(20) @default("packed")
   total_recipe                 Int
   accepted_at                  DateTime?
   send_at                      DateTime?
