@@ -9,8 +9,8 @@ export function Sidebar({ items, active }) {
         htmlFor="my-drawer"
         className="drawer-overlay"
       />
-      <div className="w-64 flex flex-col bg-sidebar h-screen">
-        <div className="flex items-center justify-center px-6 py-4 h-20 border-b border-[#C8CBD9]">
+      <div className="w-64 flex flex-col bg-sidebar h-screen fixed top-0 left-0">
+        <div className="flex items-center justify-center px-6 py-6 border-b border-[#C8CBD9]">
           <div className="flex items-center justify-center">
             <img
               src={Logo}

@@ -6,7 +6,7 @@ export function BaseModal({ id, title, children }) {
       id={id}
       className="modal"
     >
-      <div className="modal-box flex flex-col p-6 max-w-lg lg:max-w-2xl rounded-md shadow-md gap-10">
+      <div className="modal-box flex flex-col p-6 max-w-lg lg:max-w-2xl rounded-md shadow-md gap-2">
         <div className="modal-header flex items-center justify-between">
           <h2 className="text-2xl font-bold">{title}</h2>
           <form method="dialog">

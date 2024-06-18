@@ -1,11 +1,11 @@
 import {
-  HiOutlineShoppingCart,
-  HiOutlineArchive,
-  HiOutlineUserGroup,
   HiOutlineAnnotation,
-  HiOutlineClipboardList,
-  HiOutlineReceiptTax,
   HiOutlineChartBar,
+  HiOutlineClipboardList,
+  HiOutlineHeart,
+  HiOutlineReceiptTax,
+  HiOutlineShoppingCart,
+  HiOutlineViewBoards,
 } from 'react-icons/hi';
 
 export const SIDEBAR_ITEMS = [
@@ -23,14 +23,9 @@ export const SIDEBAR_ITEMS = [
     category: 'Operation',
     items: [
       {
-        title: 'Subscriptions',
+        title: 'Subscription Plan',
         path: '/dashboard/subscriptions',
-        icon: HiOutlineReceiptTax,
-      },
-      {
-        title: 'Deliveries',
-        path: '/dashboard/deliveries',
-        icon: HiOutlineArchive,
+        icon: HiOutlineShoppingCart,
       },
     ],
   },
@@ -38,14 +33,9 @@ export const SIDEBAR_ITEMS = [
     category: 'Management',
     items: [
       {
-        title: 'Users',
-        path: '/dashboard/users',
-        icon: HiOutlineUserGroup,
-      },
-      {
-        title: 'Plans',
+        title: 'Meal Plans',
         path: '/dashboard/plans',
-        icon: HiOutlineShoppingCart,
+        icon: HiOutlineReceiptTax,
       },
       {
         title: 'Recipes',
@@ -53,8 +43,18 @@ export const SIDEBAR_ITEMS = [
         icon: HiOutlineClipboardList,
       },
       {
+        title: 'Ingredients',
+        path: '/dashboard/ingredients',
+        icon: HiOutlineViewBoards,
+      },
+      {
         title: 'Preferences',
         path: '/dashboard/preferences',
+        icon: HiOutlineHeart,
+      },
+      {
+        title: 'Allergies',
+        path: '/dashboard/allergies',
         icon: HiOutlineAnnotation,
       },
     ],

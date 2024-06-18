@@ -1,41 +1,31 @@
-/* eslint-disable function-paren-newline */
-import { Navigate, Route, Routes, createBrowserRouter } from 'react-router-dom';
+import { Route, Routes, createBrowserRouter } from 'react-router-dom';
 import { LayoutDashboard } from '@/layouts';
 import {
-  StatisticPage,
-  DeliveriesPage,
   PlansPage,
   PreferencesPage,
   RecipesPage,
   SubscriptionPage,
-  UsersPage,
   LoginPage,
+  AllergiesPage,
+  IngredientsPage,
+  NotFoundPage,
+  DashboardPage,
 } from '@/pages';
 import { SIDEBAR_ITEMS } from '@/constants';
 import { PrivateRoute } from './PrivateRoute';
 import { ProtectedRoute } from './ProtectedRoute';
 
+const pageComponents = {
+  'Subscription Plan': <SubscriptionPage />,
+  'Meal Plans': <PlansPage />,
+  Recipes: <RecipesPage />,
+  Preferences: <PreferencesPage />,
+  Allergies: <AllergiesPage />,
+  Ingredients: <IngredientsPage />,
+};
+
 const getPageComponent = (title) => {
-  switch (title) {
-    case 'Subscriptions':
-      return <SubscriptionPage />;
-    case 'Deliveries':
-      return <DeliveriesPage />;
-    case 'Users':
-      return <UsersPage />;
-    case 'Plans':
-      return <PlansPage />;
-    case 'Recipes':
-      return <RecipesPage />;
-    case 'Preferences':
-      return <PreferencesPage />;
-    default:
-      return (
-        <div>
-          <h1>Not Found</h1>
-        </div>
-      );
-  }
+  return pageComponents[title] || <NotFoundPage />;
 };
 
 export const router = createBrowserRouter([
@@ -53,7 +43,7 @@ export const router = createBrowserRouter([
             <PrivateRoute
               element={
                 <LayoutDashboard>
-                  <StatisticPage />
+                  <DashboardPage />
                 </LayoutDashboard>
               }
             />
@@ -68,11 +58,15 @@ export const router = createBrowserRouter([
             />
           ))
         )}
+        <Route
+          path="*"
+          element={<NotFoundPage />}
+        />
       </Routes>
     ),
   },
   {
-    path: '/*',
-    element: <Navigate to="/dashboard/login" />,
+    path: '*',
+    element: <NotFoundPage />,
   },
 ]);

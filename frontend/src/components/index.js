@@ -1,5 +1,6 @@
 export * from './buttons';
 export * from './cards';
+export * from './commons';
 export * from './dashboard';
 export * from './data-fields';
 export * from './dropdowns';
