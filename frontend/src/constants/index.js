@@ -1,1 +1,1 @@
-export { SIDEBAR_ITEMS } from './sidebar-items';
+export { DASHBOARD_URLS } from './dashboard-urls';

@@ -1,10 +1,10 @@
-import { SIDEBAR_ITEMS } from '@/constants';
+import { DASHBOARD_URLS } from '@/constants';
 import { Link } from 'react-router-dom';
 
 export function DashboardPage() {
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-      {SIDEBAR_ITEMS.flatMap((category) =>
+      {DASHBOARD_URLS.flatMap((category) =>
         category.items.map((item) =>
           item.title !== 'Dashboard' ? (
             <div
