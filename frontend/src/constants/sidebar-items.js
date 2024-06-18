@@ -27,12 +27,7 @@ export const SIDEBAR_ITEMS = [
       {
         title: 'Subscriptions',
         path: '/dashboard/subscriptions',
-        icon: HiOutlineReceiptTax,
-      },
-      {
-        title: 'Deliveries',
-        path: '/dashboard/deliveries',
-        icon: HiOutlineArchive,
+        icon: HiOutlineShoppingCart,
       },
     ],
   },
@@ -40,14 +35,9 @@ export const SIDEBAR_ITEMS = [
     category: 'Management',
     items: [
       {
-        title: 'Users',
-        path: '/dashboard/users',
-        icon: HiOutlineUserGroup,
-      },
-      {
-        title: 'Plans',
+        title: 'Meal Plans',
         path: '/dashboard/plans',
-        icon: HiOutlineShoppingCart,
+        icon: HiOutlineReceiptTax,
       },
       {
         title: 'Recipes',

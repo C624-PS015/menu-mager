@@ -24,6 +24,7 @@ export const SelectInputField = forwardRef(
               options={options}
               className={`grow ${className} ${error ? 'border-red-500' : ''}`}
               placeholder={`Select ${label}...`}
+              isMulti
               styles={{
                 control: (provided) => ({
                   ...provided,
@@ -38,8 +39,20 @@ export const SelectInputField = forwardRef(
                   ...provided,
                   color: '#a0aec0',
                 }),
+                menuList: (provided) => ({
+                  ...provided,
+                  maxHeight: 'calc(1.5em * 4)',
+                  overflowX: 'auto',
+                }),
               }}
+              menuPlacement="auto"
               {...field}
+              onChange={(values) => {
+                if (values && values.length > 4) {
+                  return;
+                }
+                field.onChange(values);
+              }}
               {...props}
             />
           )}
