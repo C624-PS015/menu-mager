@@ -1,12 +1,10 @@
 import {
   HiOutlineAnnotation,
-  HiOutlineArchive,
   HiOutlineChartBar,
   HiOutlineClipboardList,
   HiOutlineHeart,
   HiOutlineReceiptTax,
   HiOutlineShoppingCart,
-  HiOutlineUserGroup,
   HiOutlineViewBoards,
 } from 'react-icons/hi';
 
@@ -25,7 +23,7 @@ export const SIDEBAR_ITEMS = [
     category: 'Operation',
     items: [
       {
-        title: 'Subscriptions',
+        title: 'Subscription Plan',
         path: '/dashboard/subscriptions',
         icon: HiOutlineShoppingCart,
       },

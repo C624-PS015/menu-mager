@@ -4,3 +4,4 @@ export { APIAllergies } from './APIAllergies';
 export { APIIngredients } from './APIIngredients';
 export { APIRecipes } from './APIRecipes';
 export { APIMealPlans as APIPlans } from './APIMealPlans';
+export { APISubscriptionPlans } from './APISubscriptionPlans';

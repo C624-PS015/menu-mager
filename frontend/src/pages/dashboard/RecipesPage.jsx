@@ -29,13 +29,20 @@ import {
   resetPreferencesState,
   resetRecipesState,
   resetUpdateRecipeState,
+  selectAllergies,
   selectDeleteRecipe,
+  selectIngredients,
+  selectPreferences,
   selectRecipes,
   updateRecipe,
 } from '@/slices';
 
 export function RecipesPage() {
   const { status, message, data } = useSelector(selectRecipes);
+  const { status: statusPreferences } = useSelector(selectPreferences);
+  const { status: statusAllergies } = useSelector(selectAllergies);
+  const { status: statusIngredients } = useSelector(selectIngredients);
+
   const { status: deleteStatus } = useSelector(selectDeleteRecipe);
 
   const viewModalId = useId();
@@ -140,6 +147,9 @@ export function RecipesPage() {
         addButtonProps={{ show: true, text: 'Add Recipe', onClick: showCreateModal }}
       >
         {status === 'success' &&
+          statusPreferences === 'success' &&
+          statusAllergies === 'success' &&
+          statusIngredients === 'success' &&
           tableData.length > 0 &&
           tableData.map((recipe, index) => (
             <tr key={recipe.id}>
@@ -165,17 +175,24 @@ export function RecipesPage() {
               </td>
             </tr>
           ))}
-        {status === 'success' && tableData.length === 0 && (
-          <tr>
-            <td
-              colSpan={5}
-              className="text-center py-4"
-            >
-              No data available
-            </td>
-          </tr>
-        )}
-        {status === 'loading' && (
+        {status === 'success' &&
+          statusPreferences === 'success' &&
+          statusAllergies === 'success' &&
+          statusIngredients === 'success' &&
+          tableData.length === 0 && (
+            <tr>
+              <td
+                colSpan={5}
+                className="text-center py-4"
+              >
+                No data available
+              </td>
+            </tr>
+          )}
+        {(status === 'loading' ||
+          statusPreferences === 'loading' ||
+          statusAllergies === 'loading' ||
+          statusIngredients === 'loading') && (
           <tr>
             <td
               colSpan={5}
@@ -185,7 +202,10 @@ export function RecipesPage() {
             </td>
           </tr>
         )}
-        {status === 'failed' && (
+        {(status === 'failed' ||
+          statusPreferences === 'failed' ||
+          statusAllergies === 'failed' ||
+          statusIngredients === 'failed') && (
           <tr>
             <td
               colSpan={5}

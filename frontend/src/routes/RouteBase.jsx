@@ -1,5 +1,4 @@
-/* eslint-disable function-paren-newline */
-import { Navigate, Route, Routes, createBrowserRouter } from 'react-router-dom';
+import { Route, Routes, createBrowserRouter } from 'react-router-dom';
 import { LayoutDashboard } from '@/layouts';
 import {
   StatisticPage,
@@ -10,13 +9,14 @@ import {
   LoginPage,
   AllergiesPage,
   IngredientsPage,
+  NotFoundPage,
 } from '@/pages';
 import { SIDEBAR_ITEMS } from '@/constants';
 import { PrivateRoute } from './PrivateRoute';
 import { ProtectedRoute } from './ProtectedRoute';
 
 const pageComponents = {
-  Subscriptions: <SubscriptionPage />,
+  'Subscription Plan': <SubscriptionPage />,
   'Meal Plans': <PlansPage />,
   Recipes: <RecipesPage />,
   Preferences: <PreferencesPage />,
@@ -25,7 +25,7 @@ const pageComponents = {
 };
 
 const getPageComponent = (title) => {
-  return pageComponents[title] || <Navigate to="/404" />;
+  return pageComponents[title] || <NotFoundPage />;
 };
 
 export const router = createBrowserRouter([
@@ -60,9 +60,13 @@ export const router = createBrowserRouter([
         )}
         <Route
           path="*"
-          element={<Navigate to="/404" />}
+          element={<NotFoundPage />}
         />
       </Routes>
     ),
+  },
+  {
+    path: '*',
+    element: <NotFoundPage />,
   },
 ]);

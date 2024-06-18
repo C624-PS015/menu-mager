@@ -8,11 +8,11 @@ export const SelectInputField = forwardRef(
     <div className="relative">
       <label
         htmlFor={name}
-        className={`input input-bordered border-primary hover:border-primary-hover active:border-primary focus:border-primary focus-within:border-primary flex items-center gap-2 ${
+        className={`input input-bordered border-primary hover:border-primary-hover active:border-primary focus:border-primary focus-within:border-primary flex items-center gap-2 h-max ${
           error ? 'text-red-500 border-red-500' : ''
         }`}
       >
-        {icon}
+        <i className="input-icon">{icon}</i>
         <Controller
           control={control}
           name={name}
@@ -24,7 +24,6 @@ export const SelectInputField = forwardRef(
               options={options}
               className={`grow ${className} ${error ? 'border-red-500' : ''}`}
               placeholder={`Select ${label}...`}
-              isMulti
               styles={{
                 control: (provided) => ({
                   ...provided,
@@ -33,7 +32,7 @@ export const SelectInputField = forwardRef(
                 }),
                 valueContainer: (provided) => ({
                   ...provided,
-                  padding: 0,
+                  paddingBlock: '0.5em',
                 }),
                 placeholder: (provided) => ({
                   ...provided,
@@ -47,12 +46,6 @@ export const SelectInputField = forwardRef(
               }}
               menuPlacement="auto"
               {...field}
-              onChange={(values) => {
-                if (values && values.length > 4) {
-                  return;
-                }
-                field.onChange(values);
-              }}
               {...props}
             />
           )}

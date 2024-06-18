@@ -8,6 +8,7 @@ import {
   createPlanReducer,
   createPreferenceReducer,
   createRecipeReducer,
+  createSubscriptionPlanReducer,
   deleteAllergyReducer,
   deleteIngredientReducer,
   deletePlanReducer,
@@ -21,11 +22,13 @@ import {
   preferencesReducer,
   recipeReducer,
   recipesReducer,
+  subscriptionPlanReducer,
   updateAllergyReducer,
   updateIngredientReducer,
   updatePlanReducer,
   updatePreferenceReducer,
   updateRecipeReducer,
+  updateSubscriptionPlanReducer,
 } from './slices';
 
 const store = configureStore({
@@ -61,6 +64,10 @@ const store = configureStore({
     'create-plan': createPlanReducer,
     'delete-plan': deletePlanReducer,
     'update-plan': updatePlanReducer,
+
+    'subscription-plan': subscriptionPlanReducer,
+    'create-subscription-plan': createSubscriptionPlanReducer,
+    'update-subscription-plan': updateSubscriptionPlanReducer,
   },
 });
 
