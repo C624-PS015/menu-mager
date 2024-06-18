@@ -201,6 +201,7 @@ Response body error :
   }
 }
 ```
+
 ## Get all allergy API
 
 Endpoint : GET /api/allergy
@@ -217,12 +218,10 @@ Response body success :
     "message": "success get all allergy!",
     "data": [
       {
-        "id": 1, 
+        "id": 1,
         "name": "example"
       }
     ]
   }
 }
 ```
-
-

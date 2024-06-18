@@ -2,7 +2,6 @@
 *.yaml
 log
 .env
-/.idea
 *.sql
 package-lock.json
 prisma/migrations
@@ -10,3 +9,4 @@ prisma/migrations
 *.http
 create-admin-user.js
 images/
+.vscode
