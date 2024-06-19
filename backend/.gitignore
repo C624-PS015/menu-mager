@@ -4,7 +4,6 @@ log
 .env
 *.sql
 package-lock.json
-prisma/migrations
 /test
 *.http
 create-admin-user.js
