@@ -45,10 +45,14 @@ export function HeaderUser() {
                 )
             )}
           </ul>
-          <div className="border-l border-gray-300 mx-1 sm:mx-3 h-5"></div>
-          <Link to="/login">
-            <FilledButton>Login</FilledButton>
-          </Link>
+          {location.pathname === '/' && (
+            <>
+              <div className="border-l border-gray-300 mx-1 sm:mx-3 h-5"></div>
+              <Link to="/order/select-plan">
+                <FilledButton>Order Now</FilledButton>
+              </Link>
+            </>
+          )}
         </div>
       </nav>
     </header>
