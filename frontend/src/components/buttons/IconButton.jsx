@@ -9,6 +9,7 @@ export function IconButton({ label = '', icon, onClick, className = '' }) {
       <button
         onClick={onClick}
         className={`btn btn-xs btn-circle bg-transparent border-none hover:bg-gray-200 ${className}`}
+        aria-label={label}
       >
         {icon}
       </button>

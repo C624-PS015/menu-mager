@@ -10,7 +10,13 @@ export default defineConfig(({ mode }) => {
     define: {
       'process.env': env,
     },
-    plugins: [react(), compression()],
+    plugins: [
+      react(),
+      compression({
+        algorithm: 'gzip',
+        ext: '.gz',
+      }),
+    ],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, 'src/'),

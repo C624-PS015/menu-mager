@@ -15,8 +15,12 @@ export function SearchBar({ className = '' }) {
   };
 
   return (
-    <label className={`input input-sm input-bordered flex items-center gap-2 ${className}`}>
+    <label
+      htmlFor="search-input"
+      className={`input input-sm input-bordered flex items-center gap-2 ${className}`}
+    >
       <input
+        id="search-input"
         type="text"
         className="grow w-1/3"
         placeholder="Search"
