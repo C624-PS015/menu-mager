@@ -1,7 +1,12 @@
-node_modules
+/node_modules
 *.yaml
 log
 .env
-.idea
 *.sql
-bun.lockb
+package-lock.json
+prisma/migrations
+/test
+*.http
+create-admin-user.js
+images/
+.vscode
