@@ -90,7 +90,7 @@ export function LandingPage() {
             Welcome to <span className="text-primary underline">MenuMager</span>
           </h1>
           <p className="text-gray-600 mt-4 max-w-sm text-sm sm:text-lg leading-relaxed text-center lg:text-left">
-            Your daily meal solution for lazy one. Enjoy a variety of delicious meals without
+            Your daily meal solution for lazy one. Enjoy a variety of delicious meals without {''}
             <span className="font-bold">leaving your home</span>.
           </p>
           <div className="mt-4">
