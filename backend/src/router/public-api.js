@@ -8,6 +8,7 @@ const publicApi = express.Router();
 
 publicApi.post("/api/admin/login", adminController.login);
 publicApi.get("/api/plan", subscriptionPlanController.get);
-publicApi.post("/api/user/register", userController.register);
+publicApi.post("/api/register", userController.register);
+publicApi.post("/api/login", userController.login);
 
 export default publicApi;

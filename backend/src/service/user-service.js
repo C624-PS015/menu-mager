@@ -4,13 +4,11 @@ import prismaClient from "../application/database.js";
 import ResponseError from "../error/response-error.js";
 import bcrypt from "bcrypt";
 
-const create = async (request) => {
+const register = async (request) => {
   const { user, subscriptionDetail, subscriptionDelivery, address } = validate(
-    userValidation.create,
+    userValidation.register,
     request.body,
   );
-
-  console.log(user);
 
   const isUserExist = await prismaClient.user.findUnique({
     where: {
@@ -152,6 +150,133 @@ const create = async (request) => {
   });
 };
 
+const login = async (request) => {
+  const user = validate(userValidation.login, request.body);
+
+  const isUserExist = await prismaClient.user.findUnique({
+    where: {
+      email: user.email,
+    },
+    select: {
+      password: true,
+    },
+  });
+
+  if (!isUserExist) {
+    throw new ResponseError("401", "email or password is wrong!");
+  }
+
+  const validatePassword = await bcrypt.compare(
+    user.password,
+    isUserExist.password,
+  );
+
+  if (!validatePassword) {
+    throw new ResponseError(401, "email or password is wrong!");
+  }
+
+  const token = crypto.randomUUID();
+
+  return prismaClient.user.update({
+    where: {
+      email: user.email,
+    },
+    data: {
+      token: token,
+    },
+    select: {
+      token: true,
+    },
+  });
+};
+
+const changePassword = async (request) => {
+  const token = request.get("Authorization").split(" ")[1];
+  const user = validate(userValidation.changePassword, request.body);
+
+  user.password = await bcrypt.hash(user.password, 10);
+
+  await prismaClient.user.update({
+    where: {
+      token: token,
+    },
+    data: {
+      password: user.password,
+    },
+  });
+};
+
+const update = async (request) => {
+  const token = request.get("Authorization").split(" ")[1];
+  const user = validate(userValidation.update, request.body);
+
+  const isEmailExist = await prismaClient.user.count({
+    where: {
+      email: user.email,
+      token: {
+        not: token,
+      },
+    },
+  });
+
+  if (isEmailExist === 1) {
+    throw new ResponseError(409, "email already exist!");
+  }
+
+  if (user.phone && user.phone !== "") {
+    const isPhoneExist = await prismaClient.user.count({
+      where: {
+        phone: user.phone,
+        token: {
+          not: token,
+        },
+      },
+    });
+
+    if (isPhoneExist === 1) {
+      throw new ResponseError(409, "phone already exist!");
+    }
+  }
+
+  const formatName = user.name.replace(" ", "+");
+  user.avatar = `https://ui-avatars.com/api/?name=${formatName}`;
+
+  return prismaClient.user.update({
+    where: {
+      token: token,
+    },
+    data: user,
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      avatar: true,
+      phone: true,
+    },
+  });
+};
+
+const remove = async (request) => {
+  const token = request.get("Authorization").split(" ")[1];
+
+  return prismaClient.user.delete({
+    where: {
+      token: token,
+    },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      phone: true,
+      avatar: true,
+    },
+  });
+};
+
 export default {
-  create,
+  register,
+  login,
+  changePassword,
+  update,
+  remove,
 };

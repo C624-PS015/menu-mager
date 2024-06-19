@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-const create = Joi.object({
+const register = Joi.object({
   subscriptionDetail: Joi.object({
     numOfPeople: Joi.number().required(),
     mealsPerWeek: Joi.number().required(),
@@ -47,6 +47,11 @@ const create = Joi.object({
   ),
 });
 
+const login = Joi.object({
+  email: Joi.string().email().max(100).required(),
+  password: Joi.string().min(8).max(100).required(),
+});
+
 const changePassword = Joi.object({
   password: Joi.string().min(8).max(100).required(),
 });
@@ -54,11 +59,12 @@ const changePassword = Joi.object({
 const update = Joi.object({
   name: Joi.string().max(100).required(),
   email: Joi.string().max(100).required(),
-  phone: Joi.string().max(12).required(),
+  phone: Joi.string().max(12),
 });
 
 export default {
-  create,
+  register,
+  login,
   update,
   changePassword,
 };

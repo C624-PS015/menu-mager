@@ -5,8 +5,18 @@ import preferencesController from "../controller/preferences-controller.js";
 import recipeController from "../controller/recipe-controller.js";
 import materialController from "../controller/material-controller.js";
 import allergyController from "../controller/allergy-controller.js";
+import userController from "../controller/user-controller.js";
 
 const userApi = express.Router();
+
+// user
+userApi.patch(
+  "/api/changepassword",
+  userAuthMiddleware,
+  userController.changePassword,
+);
+userApi.patch("/api/update", userAuthMiddleware, userController.update);
+userApi.delete("/api/delete", userAuthMiddleware, userController.remove);
 
 // preferences
 userApi.get(
@@ -42,12 +52,12 @@ userApi.get("/api/allergy", userAuthMiddleware, allergyController.getAll);
 
 // available food
 userApi.get(
-  "api/availablefood/:id",
+  "/api/availablefood/:id",
   userAuthMiddleware,
   availableFoodController.getDetail,
 );
 userApi.get(
-  "api/availablefood",
+  "/api/availablefood",
   userAuthMiddleware,
   availableFoodController.getAll,
 );
