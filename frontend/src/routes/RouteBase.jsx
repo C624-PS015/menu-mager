@@ -12,7 +12,9 @@ import {
   DashboardPage,
   LandingPage,
   ChoosePlanPage,
-  FillAddressPage,
+  FillProfilePage,
+  FillAccountPage,
+  SelectMealsPage,
 } from '@/pages';
 import { DASHBOARD_URLS, USER_URLS } from '@/constants';
 import { PrivateRoute } from './PrivateRoute';
@@ -28,11 +30,9 @@ const pageComponents = {
 
   'Landing Page': <LandingPage />,
   'Select Subscription Plan': <ChoosePlanPage />,
-  'Fill Address': <FillAddressPage />,
-  'Select Meals': <div>Order Select Meals</div>,
-  Payment: <div>Order Payment</div>,
-  'Register User': <div>Register User</div>,
-  'Login User': <div>Login User</div>,
+  'Fill Account': <FillAccountPage />,
+  'Fill Profile': <FillProfilePage />,
+  'Select Meals': <SelectMealsPage />,
 };
 
 const getPageComponent = (title) => {

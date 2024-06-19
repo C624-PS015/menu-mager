@@ -20,7 +20,7 @@ import { Spinner, SubscriptionPlanForm } from '@/components';
 import { capitalize } from '@/utils';
 
 export function SubscriptionPage() {
-  const { data, messages, status } = useSelector(selectSubscriptionPlan);
+  const { data, message, status } = useSelector(selectSubscriptionPlan);
   const { data: optionPreferences, status: statusPreferences } = useSelector(selectPreferences);
   const { status: statusCreate } = useSelector(selectCreateSubscriptionPlan);
   const { status: statusUpdate } = useSelector(selectUpdateSubscriptionPlan);
@@ -71,16 +71,29 @@ export function SubscriptionPage() {
   return (
     <LayoutSection>
       <div className="overflow-x-auto w-full shadow-lg border border-gray-200 p-4 rounded-xl lg:min-h-fit bg-gray-50 grid grid-rows-[auto,1fr] gap-4">
-        {status === 'success' && statusPreferences === 'success' && (
+        {status === 'success' && statusPreferences === 'success' && data ? (
           <div className="flex flex-col space-y-10 my-4 mx-10">
-            <h3 className="text-2xl font-semibold text-center">{data ? 'Update' : 'Create'} Subscription Plan</h3>
+            <h3 className="text-2xl font-semibold text-center">Update Subscription Plan</h3>
             <SubscriptionPlanForm
-              initialData={data || {}}
+              initialData={data}
               options={options}
-              onSubmit={data ? handleUpdateSubscriptionPlan : handleCreateSubscriptionPlan}
-              status={data ? statusUpdate : statusCreate}
+              onSubmit={handleUpdateSubscriptionPlan}
+              status={statusUpdate}
             />
           </div>
+        ) : (
+          status === 'failed' &&
+          message === 'subscriber plan not found!' && (
+            <div className="flex flex-col space-y-10 my-4 mx-10">
+              <h3 className="text-2xl font-semibold text-center">Create Subscription Plan</h3>
+              <SubscriptionPlanForm
+                initialData={{}}
+                options={options}
+                onSubmit={handleCreateSubscriptionPlan}
+                status={statusCreate}
+              />
+            </div>
+          )
         )}
         {(status === 'loading' || statusPreferences === 'loading') && (
           <div className="flex items-center justify-center h-96">

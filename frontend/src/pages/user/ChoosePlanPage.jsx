@@ -1,6 +1,7 @@
 import {
   getSubscriptionPlan,
   resetSubscriptionPlanState,
+  resetUserSubscription,
   selectSubscriptionPlan,
   setSubscriptionDetail,
 } from '@/slices';
@@ -100,8 +101,12 @@ export function ChoosePlanPage() {
   };
 
   useEffect(() => {
-    dispatch(resetSubscriptionPlanState());
     dispatch(getSubscriptionPlan());
+    dispatch(resetUserSubscription());
+
+    return () => {
+      dispatch(resetSubscriptionPlanState());
+    };
   }, [dispatch]);
 
   useEffect(() => {
@@ -124,18 +129,24 @@ export function ChoosePlanPage() {
       <div className="flex flex-col items-center justify-center h-full py-28">
         <h1 className="text-2xl font-bold">Personalize Your Plan</h1>
         <div className="grid grid-cols-1 sm:grid-cols-[1fr,auto,1fr] gap-4 mt-8">
-          <div className="p-4 flex flex-col items-center justify-center gap-4">
+          <div className="p-4 flex flex-col items-center justify-start gap-4">
             <h2 className="text-lg font-semibold">1. Choose Preferences</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {status === 'success' &&
                 data &&
-                data?.subscription_plan_preferences?.map((item) => (
-                  <GridItem
-                    key={item.preferences.id}
-                    item={item}
-                    selectedItems={selectedPreference}
-                    setSelectedItems={setSelectedPreference}
-                  />
+                (data.subscription_plan_preferences?.length > 0 ? (
+                  data.subscription_plan_preferences.map((item) => (
+                    <GridItem
+                      key={item.preferences.id}
+                      item={item}
+                      selectedItems={selectedPreference}
+                      setSelectedItems={setSelectedPreference}
+                    />
+                  ))
+                ) : (
+                  <div className="flex items-center justify-center h-48 w-full">
+                    <span className="text-gray-500">No preferences available</span>
+                  </div>
                 ))}
             </div>
           </div>

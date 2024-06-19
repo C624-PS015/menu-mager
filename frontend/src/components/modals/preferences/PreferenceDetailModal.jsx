@@ -18,7 +18,7 @@ export function PreferenceDetailModal({ id }) {
             <div className="avatar">
               <div className="w-2/3 rounded-full mx-auto">
                 <img
-                  src={`${process.env.BASE_URL}/${initialData?.photo}` || null}
+                  src={`${process.env.BASE_URL}/${data.photo}` || null}
                   alt={data.name}
                   style={{ objectFit: 'contain' }}
                 />

@@ -1,35 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  user: {
-    name: '',
-    email: '',
-    password: '',
-  },
-  address: {
-    province: '',
-    district: '',
-    subDistrict: '',
-    postCode: '',
-    village: '',
-    rt: '',
-    rw: '',
-  },
-  subscriptionDetail: {
-    numOfPeople: null,
-    mealsPerWeek: null,
-    totalServing: null,
-    boxPrice: null,
-    pricePerServing: null,
-    shippingPrice: null,
-    totalPrice: null,
-    preferences: [],
-  },
-  subscriptionDelivery: {
-    date: '',
-    totalRecipe: null,
-    recipe: [],
-  },
+  user: {},
+  address: {},
+  subscriptionDetail: {},
+  subscriptionDelivery: [],
 };
 
 const userSubscriptionSlice = createSlice({
@@ -37,16 +12,37 @@ const userSubscriptionSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action) => {
-      state.user = action.payload;
+      state.user = {
+        ...state.user,
+        ...action.payload,
+      };
     },
     setAddress: (state, action) => {
-      state.address = action.payload;
+      state.address = {
+        ...state.address,
+        ...action.payload,
+      };
     },
     setSubscriptionDetail: (state, action) => {
-      state.subscriptionDetail = action.payload;
+      state.subscriptionDetail = {
+        ...state.subscriptionDetail,
+        ...action.payload,
+      };
     },
     setSubscriptionDelivery: (state, action) => {
       state.subscriptionDelivery = action.payload;
+    },
+    resetUser: (state) => {
+      state.user = initialState.user;
+    },
+    resetAddress: (state) => {
+      state.address = initialState.address;
+    },
+    resetSubscriptionDetail: (state) => {
+      state.subscriptionDetail = initialState.subscriptionDetail;
+    },
+    resetSubscriptionDelivery: (state) => {
+      state.subscriptionDelivery = initialState.subscriptionDelivery;
     },
     resetUserSubscription: (state) => {
       state.user = initialState.user;
@@ -57,7 +53,16 @@ const userSubscriptionSlice = createSlice({
   },
 });
 
-export const { setUser, setAddress, setSubscriptionDetail, setSubscriptionDelivery, resetUserSubscription } =
-  userSubscriptionSlice.actions;
+export const {
+  setUser,
+  setAddress,
+  setSubscriptionDetail,
+  setSubscriptionDelivery,
+  resetUser,
+  resetAddress,
+  resetSubscriptionDetail,
+  resetSubscriptionDelivery,
+  resetUserSubscription,
+} = userSubscriptionSlice.actions;
 export const selectUserSubscription = (state) => state.userSubscription;
 export const userSubscriptionReducer = userSubscriptionSlice.reducer;

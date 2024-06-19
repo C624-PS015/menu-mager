@@ -1,3 +1,5 @@
 export { LandingPage } from './LandingPage';
 export { ChoosePlanPage } from './ChoosePlanPage';
-export { FillAddressPage } from './FillAddressPage';
+export { FillProfilePage } from './FillProfilePage';
+export { FillAccountPage } from './FillAccountPage';
+export { SelectMealsPage } from './SelectMealsPage';

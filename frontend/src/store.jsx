@@ -9,6 +9,7 @@ import {
   createPreferenceReducer,
   createRecipeReducer,
   createSubscriptionPlanReducer,
+  createUserSubscriptionReducer,
   deleteAllergyReducer,
   deleteIngredientReducer,
   deletePlanReducer,
@@ -71,6 +72,7 @@ const store = configureStore({
     'update-subscription-plan': updateSubscriptionPlanReducer,
 
     userSubscription: userSubscriptionReducer,
+    'create-user-subscription': createUserSubscriptionReducer,
   },
 });
 
