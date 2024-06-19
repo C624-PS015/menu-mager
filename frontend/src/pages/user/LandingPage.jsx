@@ -181,7 +181,7 @@ export function LandingPage() {
           Get Started with <span className="text-primary">MenuMager</span> Today!
         </h2>
         <div className="mt-8">
-          <Link to="#">
+          <Link to="/order/select-plan">
             <FilledButton className="w-48 h-12">Order Now</FilledButton>
           </Link>
         </div>
