@@ -29,6 +29,7 @@ import {
   updatePreferenceReducer,
   updateRecipeReducer,
   updateSubscriptionPlanReducer,
+  userSubscriptionReducer,
 } from './slices';
 
 const store = configureStore({
@@ -68,6 +69,8 @@ const store = configureStore({
     'subscription-plan': subscriptionPlanReducer,
     'create-subscription-plan': createSubscriptionPlanReducer,
     'update-subscription-plan': updateSubscriptionPlanReducer,
+
+    userSubscription: userSubscriptionReducer,
   },
 });
 
