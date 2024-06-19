@@ -71,7 +71,7 @@ export function RecipeForm({ modalId, onSubmit, status, initialData, options }) 
               unit: material.unit,
             }))
           : [{ name: '', amount: 0, unit: '' }],
-      photo: `localhost:8000/${initialData?.photo}` || null,
+      photo: `${process.env.BASE_URL}/${initialData?.photo}` || null,
     },
   });
 

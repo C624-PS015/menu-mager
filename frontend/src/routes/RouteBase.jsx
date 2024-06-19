@@ -10,8 +10,10 @@ import {
   IngredientsPage,
   NotFoundPage,
   DashboardPage,
+  LandingPage,
+  ChoosePlanPage,
 } from '@/pages';
-import { DASHBOARD_URLS } from '@/constants';
+import { DASHBOARD_URLS, USER_URLS } from '@/constants';
 import { PrivateRoute } from './PrivateRoute';
 import { ProtectedRoute } from './ProtectedRoute';
 
@@ -22,6 +24,14 @@ const pageComponents = {
   Preferences: <PreferencesPage />,
   Allergies: <AllergiesPage />,
   Ingredients: <IngredientsPage />,
+
+  'Landing Page': <LandingPage />,
+  'Select Subscription Plan': <ChoosePlanPage />,
+  'Select Meals': <div>Order Select Meals</div>,
+  'Fill Address': <div>Order Fill Address</div>,
+  Payment: <div>Order Payment</div>,
+  'Register User': <div>Register User</div>,
+  'Login User': <div>Login User</div>,
 };
 
 const getPageComponent = (title) => {
@@ -29,6 +39,24 @@ const getPageComponent = (title) => {
 };
 
 export const router = createBrowserRouter([
+  {
+    path: '*',
+    element: (
+      <Routes>
+        {USER_URLS.map((item) => (
+          <Route
+            key={item.title}
+            path={item.path}
+            element={getPageComponent(item.title)}
+          />
+        ))}
+        <Route
+          path="*"
+          element={<NotFoundPage />}
+        />
+      </Routes>
+    ),
+  },
   {
     path: 'dashboard/*',
     element: (
@@ -64,9 +92,5 @@ export const router = createBrowserRouter([
         />
       </Routes>
     ),
-  },
-  {
-    path: '*',
-    element: <NotFoundPage />,
   },
 ]);

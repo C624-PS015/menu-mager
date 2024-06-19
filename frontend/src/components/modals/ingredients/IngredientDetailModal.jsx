@@ -18,7 +18,7 @@ export function IngredientDetailModal({ id }) {
             <div className="avatar">
               <div className="w-2/3 rounded-full mx-auto">
                 <img
-                  src={`http://localhost:9000/${data.photo}` || data.photo}
+                  src={`${process.env.BASE_URL}/${initialData?.photo}` || null}
                   alt={data.name}
                   style={{ objectFit: 'contain' }}
                 />
